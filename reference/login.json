@@ -1,0 +1,4939 @@
+{
+  "openapi": "3.0.3",
+  "x-stoplight": {
+    "id": "m7h5cqapugvcb"
+  },
+  "info": {
+    "title": "login API",
+    "version": "1.0-SNAPSHOT",
+    "description": "API del microservicio de login",
+    "license": {
+      "name": "Proprietary - Internal Use Only",
+      "url": "https://v4.metacontratas.com/"
+    },
+    "contact": {
+      "email": "soporte.tecnico@metadata.es",
+      "name": "Metadata S.L.",
+      "url": "https://v4.metacontratas.com/"
+    }
+  },
+  "tags": [
+    {
+      "name": "Dominio",
+      "description": "Servicio de dominios"
+    },
+    {
+      "name": "Empresas",
+      "description": "Servicio de empresas"
+    },
+    {
+      "name": "Entorno",
+      "description": "Servicio de entornos"
+    },
+    {
+      "name": "Grupo Entornos",
+      "description": "Servicio de grupo entornos"
+    },
+    {
+      "name": "Private",
+      "description": "Servicio de endpoints privados"
+    },
+    {
+      "name": "Public",
+      "description": "Servicio de endpoints publicos"
+    },
+    {
+      "name": "Usuario",
+      "description": "Usuario"
+    },
+    {
+      "name": "UsuarioAcceso",
+      "description": "Servicio de usuariosAccesos"
+    }
+  ],
+  "paths": {
+    "/login/v1/dominios": {
+      "get": {
+        "tags": [
+          "Dominio"
+        ],
+        "summary": "Obtiene todos los dominios",
+        "operationId": "getDominios",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DominioDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador"
+        ],
+        "x-permisos": true,
+        "description": "Obtiene todos los dominios",
+        "x-stoplight": {
+          "id": "dmzapvr55o01e"
+        }
+      },
+      "post": {
+        "tags": [
+          "Dominio"
+        ],
+        "summary": "Crea un dominio",
+        "operationId": "postDominios",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DominioDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DominioDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden\n - LOG_0042: El dominio ya existe"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador"
+        ],
+        "x-permisos": true,
+        "description": "Crea un dominio",
+        "x-stoplight": {
+          "id": "cmgugepkns9ni"
+        }
+      }
+    },
+    "/login/v1/dominios/{idDominio}": {
+      "get": {
+        "tags": [
+          "Dominio"
+        ],
+        "summary": "Devuelve un dominio por su id",
+        "operationId": "getDominioPorIdDominio",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DominioDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador"
+        ],
+        "x-permisos": true,
+        "description": "Devuelve un dominio por su id",
+        "x-stoplight": {
+          "id": "akpzvymu2xehm"
+        }
+      },
+      "put": {
+        "tags": [
+          "Dominio"
+        ],
+        "summary": "Edita un dominio por su id",
+        "operationId": "putDominioPorIdDominio",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DominioDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DominioDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden\n - LOG_0042: El dominio ya existe"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador"
+        ],
+        "x-permisos": true,
+        "description": "Edita un dominio por su id",
+        "x-stoplight": {
+          "id": "8ii0382mrv1jc"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Dominio"
+        ],
+        "summary": "Elimina un dominio por su id",
+        "operationId": "deleteDominioPorIdDominio",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DominioDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador"
+        ],
+        "x-permisos": true,
+        "description": "Elimina un dominio por su id",
+        "x-stoplight": {
+          "id": "himz3oc1c6qnt"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idDominio"
+        }
+      ]
+    },
+    "/login/v1/empresas/{idEmpresa}/usuarios": {
+      "get": {
+        "tags": [
+          "Empresas"
+        ],
+        "summary": "Devuelve los usuarios activos con rol EMPRESA_INTERNO de una empresa",
+        "operationId": "getUsuariosPorIdEmpresa",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/listadoRoles"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioEmpresaDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador"
+        ],
+        "x-permisos": true,
+        "description": "Devuelve los usuarios activos con rol EMPRESA_INTERNO de una empresa",
+        "x-stoplight": {
+          "id": "pdq452pph17fp"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idEmpresa"
+        }
+      ]
+    },
+    "/login/v1/entornos/{idEntorno}/accesos": {
+      "get": {
+        "tags": [
+          "Entorno"
+        ],
+        "summary": "Devuelve los accesos que tiene un entorno",
+        "operationId": "getAccesosPorIdEntorno",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/idsUsuarioEntorno"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioAccesoDtoResponseEntorno"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0035: El JWT tiene el rol EMPRESA_INTERNO por lo que el idEntorno especificado debe ser igual al idEntorno del JWT"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Devuelve los accesos que tiene un entorno",
+        "x-stoplight": {
+          "id": "40hp3vv2rfnns"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idEntorno"
+        }
+      ]
+    },
+    "/login/v1/entornos/{idEntorno}/autenticar": {
+      "post": {
+        "tags": [
+          "Entorno"
+        ],
+        "summary": "Obtiene los tokens de autenticación de admin para un usuario en un entorno, a partir de un Refresh Token",
+        "operationId": "postAutenticarPorIdEntorno",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Refresh-Token"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokensDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador"
+        ],
+        "x-permisos": true,
+        "description": "Obtiene los tokens de autenticación de admin para un usuario en un entorno, a partir de un Refresh Token",
+        "x-stoplight": {
+          "id": "kt6skr7lpfg07"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idEntorno"
+        }
+      ]
+    },
+    "/login/v1/grupos-entornos/{idGrupoEntornos}/usuarios": {
+      "get": {
+        "tags": [
+          "Grupo Entornos"
+        ],
+        "summary": "Devuelve los usuarios relacionados con un grupo de entornos",
+        "operationId": "getUsuariosPorIdGrupoEntornos",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "administrador_grupo_entornos"
+        ],
+        "x-permisos": true,
+        "description": "Devuelve los usuarios relacionados con un grupo de entornos",
+        "x-stoplight": {
+          "id": "m8sq5mwrc3d9u"
+        }
+      },
+      "post": {
+        "tags": [
+          "Grupo Entornos"
+        ],
+        "summary": "Relaciona una lista de usuarios con un grupo de entornos",
+        "operationId": "postUsuariosPorIdGrupoEntornos",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestBodyDobleListaInteger"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrupoEntornoUsuariosDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0060: No puede relacionar con el grupo de entornos un usuario que no esté activo, no tenga rol EMPRESA_INTERNO o que no sea de la empresa administradora del grupo"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "administrador_grupo_entornos"
+        ],
+        "x-permisos": true,
+        "description": "Relaciona una lista de usuarios con un grupo de entornos",
+        "x-stoplight": {
+          "id": "eyxz7rrp35ak8"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idGrupoEntornos"
+        }
+      ]
+    },
+    "/login/v1/private/autenticar": {
+      "post": {
+        "tags": [
+          "Private"
+        ],
+        "summary": "Obtiene los tokens de autenticación internos para un usuario (o un email) y un entorno",
+        "operationId": "postAutenticarPrivate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenInternoDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokensDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "description": "Obtiene los tokens de autenticación internos para un usuario (o un email) y un entorno",
+        "x-stoplight": {
+          "id": "5x7tp3ljae46w"
+        }
+      }
+    },
+    "/login/v1/private/autenticarjwt": {
+      "post": {
+        "tags": [
+          "Private"
+        ],
+        "summary": "Obtiene los tokens de autenticación internos (añadiendo el rol 'dios') para un Access Token existente",
+        "operationId": "postAutenticarjwtPrivate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenInternoDesdeAccessTokenDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokensDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "- LOG_0048: No se pueden extraer claims del Access Token proporcionado"
+          }
+        },
+        "description": "Obtiene los tokens de autenticación internos (añadiendo el rol 'dios') para un Access Token existente",
+        "x-stoplight": {
+          "id": "suanip3tuymou"
+        }
+      }
+    },
+    "/login/v1/private/generar-jwt-publico": {
+      "post": {
+        "tags": [
+          "Private"
+        ],
+        "summary": "Obtiene un token de autenticación público para un usuario (o un email) y un entorno",
+        "operationId": "postGenerarJwtPublicoPrivate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenPublicoDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionTokenDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "- LOG_0049: No se reconoce el rol %s"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "description": "Obtiene un token de autenticación público para un usuario (o un email) y un entorno",
+        "x-stoplight": {
+          "id": "cz5bv7cwvia1l"
+        }
+      }
+    },
+    "/login/v1/private/usuarios": {
+      "post": {
+        "tags": [
+          "Private"
+        ],
+        "summary": "Crea un usuario que acaba de acceder utilizando su proveedor de identidad",
+        "description": "Esta operación solo la debe realizar el servidor Keycloak",
+        "operationId": "postUsuariosPrivate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CorreoDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "x-stoplight": {
+          "id": "lfaonfinru7kj"
+        }
+      }
+    },
+    "/login/v1/public/autenticar": {
+      "post": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Obtiene un token de autenticación público a partir de un token de Metacontratas",
+        "operationId": "postAutenticarPublic",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokensDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "- LOG_0009: Acceso a restablecer contraseña caducado\n - LOG_0025: El token no es válido porque ya ha sido usado"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "description": "Obtiene un token de autenticación público a partir de un token de Metacontratas",
+        "x-stoplight": {
+          "id": "qkd5zbc7zsg42"
+        }
+      }
+    },
+    "/login/v1/public/refrescar": {
+      "post": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Obtiene un conjunto de tokens de autenticación a partir de un Access Token y un Refresh Token",
+        "operationId": "postRefrescarPublic",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Access-Token"
+          },
+          {
+            "$ref": "#/components/parameters/Refresh-Token"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokensDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "description": "Obtiene un conjunto de tokens de autenticación a partir de un Access Token y un Refresh Token",
+        "x-stoplight": {
+          "id": "kq9ygfpfe6bqx"
+        }
+      }
+    },
+    "/login/v1/usuarios": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Recupera todos los usuarios",
+        "operationId": "getUsuarios",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/listaIds"
+          },
+          {
+            "$ref": "#/components/parameters/rol"
+          },
+          {
+            "$ref": "#/components/parameters/usuario"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioDtoResponseListado"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador",
+          "administrador_grupo_entornos"
+        ],
+        "x-permisos": false,
+        "description": "Recupera todos los usuarios",
+        "x-stoplight": {
+          "id": "hrtg47je71gun"
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Crea un usuario en el sistema",
+        "description": "El usuario se creará en estado desactivado",
+        "operationId": "postUsuarios",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "- LOG_0001: El usuario ya está registrado<br/>LOG_0040: No es posible activar el usuario %s porque no se encuentra su invitación<br/>GEN_0014: La propiedad %s debe ser mayor que %d"
+          }
+        },
+        "x-stoplight": {
+          "id": "wpvod3r9bp45m"
+        }
+      }
+    },
+    "/login/v1/usuarios/autenticar": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Obtiene los tokens de autenticación de login para un usuario, a partir de sus credenciales; además del número de errores de login cometidos",
+        "operationId": "postAutenticarUsuarios",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokensDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "- LOG_0010: Usuario/Contraseña incorrectos\n - LOG_0012: No se puede autenticar un usuario cuyo dominio está federado\n - LOG_0013: La contraseña ha caducado. Debes generar una nueva\n - LOG_0014: Cuenta bloqueada por número de intentos de entrada incorrectos. Restaure la contraseña.\n - LOG_0015: El usuario no tiene una contraseña actual\n - LOG_0044: Error proveniente de Keycloak: %s\n - LOG_0045: La cuenta ha sido desactivada (Contacte con soporte)\n - LOG_0046: La cuenta no está verificada, verifique la cuenta a partir del correo enviado\n - LOG_0054: El código OTP no es válido"
+          }
+        },
+        "description": "Obtiene los tokens de autenticación de login para un usuario, a partir de sus credenciales; además del número de errores de login cometidos",
+        "x-stoplight": {
+          "id": "ln9fkbumbntic"
+        }
+      }
+    },
+    "/login/v1/usuarios/autenticar-codigo-autorizacion": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Obtiene los tokens de autenticación de login para un usuario, a partir de un código de autorización de Keycloak",
+        "operationId": "postAutenticarCodigoAutorizacionUsuarios",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/codigoAutorizacion"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokensDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "- LOG_0018: Se ha producido un error en la autenticación del usuario utilizando proveedor de identidad\n- LOG_0044: Error proveniente de Keycloak: %s\n- LOG_0045: La cuenta ha sido desactivada (Contacte con soporte)"
+          }
+        },
+        "description": "Obtiene los tokens de autenticación de login para un usuario, a partir de un código de autorización de Keycloak",
+        "x-stoplight": {
+          "id": "nndw84kc1ghaq"
+        }
+      }
+    },
+    "/login/v1/usuarios/comprobar-autenticacion": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Devuelve el tipo de autenticación a realizar por un usuario; si se realiza contra proveedor de identidad configurado devuelve \nURL para la redirección; también se devuelve el método de autenticación multifactor configurado",
+        "operationId": "postComprobarAutenticacionUsuarios",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CorreoDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComprobarAutenticacionDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "description": "Devuelve el tipo de autenticación a realizar por un usuario; si se realiza contra proveedor de identidad configurado devuelve \nURL para la redirección; también se devuelve el método de autenticación multifactor configurado",
+        "x-stoplight": {
+          "id": "i4nbfi2ddfr5k"
+        }
+      }
+    },
+    "/login/v1/usuarios/desconectar": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Cierra la sesión de Keycloak de un usuario identificado por su Id Token",
+        "operationId": "postDesconectarUsuarios",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id-Token"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "description": "Cierra la sesión de Keycloak de un usuario identificado por su Id Token",
+        "x-stoplight": {
+          "id": "bkyg9r24ke2b8"
+        }
+      }
+    },
+    "/login/v1/usuarios/invitacion": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Crea un usuario invitado",
+        "operationId": "postInvitacionUsuarios",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvitacionDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvitacionDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "LOG_0001: El usuario ya está registrado"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-permisos": true,
+        "description": "Crea un usuario invitado",
+        "x-stoplight": {
+          "id": "825svr9tv441n"
+        }
+      }
+    },
+    "/login/v1/usuarios/reset-password": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Restablece la contraseña de un usuario",
+        "summary": "Restablece la contraseña de un usuario",
+        "operationId": "postResetPasswordUsuarios",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CorreoDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden \n - LOG_0045: La cuenta ha sido desactivada (Contacte con soporte)\n - LOG_0046: La cuenta no está verificada, verifique la cuenta a partir del correo enviado"
+          }
+        },
+        "x-stoplight": {
+          "id": "4btgcmup5pzpd"
+        }
+      }
+    },
+    "/login/v1/usuarios/{idUsuario}": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Recupera un usuario",
+        "operationId": "getUsuarioPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0005: El JWT tiene el rol NO_ADMINISTRADOR por lo que el idUsuario especificado debe ser igual al idUsuario del JWT"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador",
+          "administrador_grupo_entornos"
+        ],
+        "x-permisos": false,
+        "description": "Recupera un usuario",
+        "x-stoplight": {
+          "id": "kmtl4jb7hzdey"
+        }
+      },
+      "put": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Modifica la información de un usuario",
+        "operationId": "putUsuarioPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioDtoRequestUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0005: El JWT tiene el rol NO_ADMINISTRADOR por lo que el idUsuario especificado debe ser igual al idUsuario del JWT"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador",
+          "administrador_grupo_entornos"
+        ],
+        "x-permisos": false,
+        "description": "Modifica la información de un usuario",
+        "x-stoplight": {
+          "id": "g43yliiljcp97"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/accesos": {
+      "get": {
+        "tags": [
+          "UsuarioAcceso"
+        ],
+        "summary": "Devuelve los accesos que tienen un usuario",
+        "operationId": "getAccesosPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioAccesoDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0005: El JWT tiene el rol NO_ADMINISTRADOR por lo que el idUsuario especificado debe ser igual al idUsuario del JWT\n - LOG_0061: No puede consultar datos de un usuario que no esté en una empresa de su grupo de entornos"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador",
+          "administrador_grupo_entornos"
+        ],
+        "x-permisos": false,
+        "description": "Devuelve los accesos que tienen un usuario",
+        "x-stoplight": {
+          "id": "0oi7h92z2qs66"
+        }
+      },
+      "post": {
+        "tags": [
+          "UsuarioAcceso"
+        ],
+        "summary": "Crea un acceso de un usuario para una aplicación",
+        "operationId": "postAccesosPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioAccesoDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioAccesoDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0029: Ya existe un acceso para el mismo usuario, aplicación, entorno y usuario interno\n - LOG_0031: El entorno no pertenece a la empresa especificada\n - LOG_0032: La empresa no tiene creado ningún entorno y por ello no se puede asignar un acceso a la misma\n - LOG_0065: No puede crear un acceso con rol EMPRESA_EXTERNO para la empresa principal\n - LOG_0066: No puede crear un acceso con rol EMPRESA_INTERNO para una empresa que no sea la principal"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Crea un acceso de un usuario para una aplicación",
+        "x-stoplight": {
+          "id": "615cd3v7x2jli"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/accesos/{idAcceso}": {
+      "get": {
+        "tags": [
+          "UsuarioAcceso"
+        ],
+        "summary": "Devuelve un acceso que tiene un usuario",
+        "operationId": "getAccesoPorIdUsuarioPorIdAcceso",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioAccesoDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Devuelve un acceso que tiene un usuario",
+        "x-stoplight": {
+          "id": "nuw1ob7slrx91"
+        }
+      },
+      "put": {
+        "tags": [
+          "UsuarioAcceso"
+        ],
+        "summary": "Edita un acceso",
+        "operationId": "putAccesoPorIdUsuarioPorIdAcceso",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioAccesoDtoRequestUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioAccesoDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0070: Solo los administradores pueden editar accesos de otros usuarios"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": false,
+        "description": "Edita un acceso",
+        "x-stoplight": {
+          "id": "jbj6lp0ditnxr"
+        }
+      },
+      "delete": {
+        "tags": [
+          "UsuarioAcceso"
+        ],
+        "summary": "Elimina un acceso de V3",
+        "operationId": "deleteAccesoPorIdUsuarioPorIdAcceso",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioAccesoDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0068: Solo se pueden borrar accesos con aplicación V3\n- LOG_0069: Solo los administradores pueden eliminar accesos de otros usuarios"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": false,
+        "description": "Elimina un acceso de V3",
+        "x-stoplight": {
+          "id": "91euqaxsfqf3f"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idAcceso"
+        },
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/accesos/{idAcceso}/activar": {
+      "post": {
+        "tags": [
+          "UsuarioAcceso"
+        ],
+        "summary": "Activa el acceso de un usuario",
+        "operationId": "postActivarPorIdUsuarioPorIdAcceso",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivarAccesoDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0035: El JWT tiene el rol EMPRESA_INTERNO por lo que el idEntorno especificado debe ser igual al idEntorno del JWT\n - LOG_0036: El usuario no puede activar el acceso de otro usuario"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Activa el acceso de un usuario",
+        "x-stoplight": {
+          "id": "41fjxckh6ygmk"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idAcceso"
+        },
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/accesos/{idAcceso}/autenticar": {
+      "post": {
+        "tags": [
+          "UsuarioAcceso"
+        ],
+        "summary": "Obtiene los tokens de autenticación de entorno para un usuario, a partir de su Refresh Token",
+        "operationId": "postAutenticarPorIdUsuarioPorIdAcceso",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Refresh-Token"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokensDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0002: El idUsuario especificado debe ser igual al idUsuario del JWT\n - LOG_0022: El acceso no pertenece al usuario indicado\n - LOG_0023: La empresa del entorno no es cliente del entorno al que pertenece el acceso"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": false,
+        "description": "Obtiene los tokens de autenticación de entorno para un usuario, a partir de su Refresh Token",
+        "x-stoplight": {
+          "id": "glyfxkm4sosci"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idAcceso"
+        },
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/accesos/{idAcceso}/config-v3": {
+      "put": {
+        "tags": [
+          "UsuarioAcceso"
+        ],
+        "summary": "Actualiza la configuración V3 de un acceso",
+        "operationId": "putConfigV3PorIdUsuarioPorIdAcceso",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfigV3DtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfigV3DtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0064: Solo se puede establecer la configuración de V3 de un acceso con aplicación V3"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "superadministrador"
+        ],
+        "x-permisos": true,
+        "description": "Actualiza la configuración V3 de un acceso",
+        "x-stoplight": {
+          "id": "gi9dzqc1v3x5h"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idAcceso"
+        },
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/accesos/{idAcceso}/desactivar": {
+      "post": {
+        "tags": [
+          "UsuarioAcceso"
+        ],
+        "summary": "Desactiva el acceso de un usuario",
+        "operationId": "postDesactivarPorIdUsuarioPorIdAcceso",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesactivarAccesoDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0037: El usuario no tiene permiso para desactivar su acceso\n - LOG_0038: El acceso ya está desactivado"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Desactiva el acceso de un usuario",
+        "x-stoplight": {
+          "id": "mri49ktv7wpw8"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idAcceso"
+        },
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/accesos/{idAcceso}/favorito": {
+      "post": {
+        "tags": [
+          "UsuarioAcceso"
+        ],
+        "summary": "Modifica el acceso favorito de un usuario",
+        "operationId": "postFavoritoPorIdUsuarioPorIdAcceso",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FavoritoDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FavoritoDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0005: El JWT tiene el rol NO_ADMINISTRADOR por lo que el idUsuario especificado debe ser igual al idUsuario del JWT"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Modifica el acceso favorito de un usuario",
+        "x-stoplight": {
+          "id": "wtccfsllcypt8"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idAcceso"
+        },
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/activar": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Activa un usuario",
+        "operationId": "postActivarPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActivarDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivarDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "- LOG_0028: No se puede activar o desactivar un usuario que no ha sido activado nunca"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "description": "Activa un usuario",
+        "x-stoplight": {
+          "id": "28qkhorpocvkd"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/autenticar": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Obtiene los tokens de autenticación de login suplantando a un usuario, a partir de su Refresh Token; además del número de errores de login cometidos",
+        "operationId": "postAutenticarPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Refresh-Token"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokensDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0033: No se puede suplantar al usuario en curso\n- LOG_0034: No se puede suplantar a un usuario usando un usuario suplantado\n- LOG_0044: Error proveniente de Keycloak: %s"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Obtiene los tokens de autenticación de login suplantando a un usuario, a partir de su Refresh Token; además del número de errores de login cometidos",
+        "x-stoplight": {
+          "id": "7p9aqu1rgzfk5"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/avatar": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Crea o modifica un avatar para un usuario determinado",
+        "operationId": "postAvatarPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "file",
+                  "fileName"
+                ],
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "format": "binary",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "fileName": {
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "fileName": {
+                  "contentType": "text/plain"
+                },
+                "file": {
+                  "contentType": "application/octet-stream"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchivoDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": false,
+        "description": "Crea o modifica un avatar para un usuario determinado",
+        "x-stoplight": {
+          "id": "tkd1jq6pifz1b"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Eliminar el avatar de un usuario determinado",
+        "operationId": "deleteAvatarPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchivoDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": false,
+        "description": "Eliminar el avatar de un usuario determinado",
+        "x-stoplight": {
+          "id": "rxipzv59y7u7w"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/cambiar-password": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Cambia la contraseña de un usuario",
+        "operationId": "postCambiarPasswordPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0002: El idUsuario especificado debe ser igual al idUsuario del JWT\n - LOG_0006: La password no cumple los criterios de seguridad\n - LOG_0007: La contraseña no puede coincidir con alguna de las últimas 5 contraseñas del usuario\n - LOG_0008: La password no es válida porque está incluida en la lista de password inseguras\n - LOG_0025: El token no es válido porque ya ha sido usado\n - LOG_0045: La cuenta ha sido desactivada (Contacte con soporte)"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "reset_password",
+          "no_administrador",
+          "administrador_grupo_entornos"
+        ],
+        "x-permisos": true,
+        "description": "Cambia la contraseña de un usuario",
+        "x-stoplight": {
+          "id": "i3zvuy4lqyxap"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/cambiar-rol": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Cambia el rol de un usuario",
+        "operationId": "postCambiarRolPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioRolDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "administrador_grupo_entornos"
+        ],
+        "x-permisos": true,
+        "description": "Cambia el rol de un usuario",
+        "x-stoplight": {
+          "id": "g8qusp8nbl8w7"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/configuraciones": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Recupera las configuraciones asociadas a un usuario",
+        "operationId": "getConfiguracionesPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConfiguracionDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0005: El JWT tiene el rol NO_ADMINISTRADOR por lo que el idUsuario especificado debe ser igual al idUsuario del JWT"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": false,
+        "description": "Recupera las configuraciones asociadas a un usuario",
+        "x-stoplight": {
+          "id": "cwxc35cq867a0"
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Crea un usuarioConfiguración si no existe. Si existe, lo edita",
+        "operationId": "postConfiguracionesPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ConfiguracionDtoRequest"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConfiguracionDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0020: El tipo de valor introducido no coincide con el tipo de la configuración seleccionada"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Crea un usuarioConfiguración si no existe. Si existe, lo edita",
+        "x-stoplight": {
+          "id": "yevaym5gidjth"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/entradas": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Devuelve el histórico de accesos que tiene un usuario",
+        "operationId": "getEntradasPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/fechaDesde"
+          },
+          {
+            "$ref": "#/components/parameters/fechaHasta"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EntradasResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": false,
+        "description": "Devuelve el histórico de accesos que tiene un usuario",
+        "x-stoplight": {
+          "id": "5o2uroknisd9o"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/grupos-entornos": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Devuelve los grupos de entornos que tiene relacionados un usuario",
+        "operationId": "getGruposEntornosPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "format": "int32",
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "administrador_grupo_entornos"
+        ],
+        "x-permisos": false,
+        "description": "Devuelve los grupos de entornos que tiene relacionados un usuario",
+        "x-stoplight": {
+          "id": "8va8y7go0sw8u"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/otp": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Obtiene un listado de las credenciales OTPs configuradas para un usuario",
+        "operationId": "getOtpPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OtpDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0044: Error proveniente de Keycloak: %s\n- LOG_0055: Solo los superadministradores pueden ver las credenciales OTP de otros usuarios"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": false,
+        "description": "Obtiene un listado de las credenciales OTPs configuradas para un usuario",
+        "x-stoplight": {
+          "id": "ab4a2tj37x6td"
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Crea una credencial OTP a un usuario",
+        "operationId": "postOtpPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OtpDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OtpDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0044: Error proveniente de Keycloak: %s\n- LOG_0050: No se puede configurar OTP para un usuario suplantado\n- LOG_0051: No se puede configurar OTP para otro usuario\n - LOG_0052: El usuario tiene configurado otro método de autenticación multifactor\n - LOG_0053: El usuario ya tiene una credencial OTP configurada con ese nombre de dispositivo\n - LOG_0054: El código OTP no es válido\n - LOG_0059: Un usuario federado no puede establecer autenticación multifactor"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Crea una credencial OTP a un usuario",
+        "x-stoplight": {
+          "id": "7pk42n38bdqf8"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/otp/qr": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Obtiene el código QR para que un usuario configure un OTP",
+        "operationId": "getQrOtpPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OtpQrDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0044: Error proveniente de Keycloak: %s\n- LOG_0050: No se puede configurar OTP para un usuario suplantado\n- LOG_0051: No se puede configurar OTP para otro usuario"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Obtiene el código QR para que un usuario configure un OTP",
+        "x-stoplight": {
+          "id": "146dtr2dtldrx"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/otp/{idCredencial}": {
+      "put": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Actualiza una credencial OTP de un usuario",
+        "operationId": "putOtpPorIdUsuarioPorIdCredencial",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OtpEditDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OtpDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0044: Error proveniente de Keycloak: %s\n- LOG_0057: La credencial OTP no existe\n- LOG_0058: Solo los superadministradores pueden modificar credenciales OTP de otros usuarios"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Actualiza una credencial OTP de un usuario",
+        "x-stoplight": {
+          "id": "8aqmv8oxu2gxv"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Elimina una credencial OTP de un usuario",
+        "operationId": "deleteOtpPorIdUsuarioPorIdCredencial",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OtpDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0044: Error proveniente de Keycloak: %s\n- LOG_0056: Solo los superadministradores pueden eliminar credenciales OTP de otros usuarios\n- LOG_0057: La credencial OTP no existe"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Elimina una credencial OTP de un usuario",
+        "x-stoplight": {
+          "id": "xckiafl0267gz"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idCredencial"
+        },
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/politica-seguridad": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Permite editar el check de politica de seguridad del usuario",
+        "operationId": "postPoliticaSeguridadPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PoliticaSeguridadLeidaDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PoliticaSeguridadLeidaDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "description": "Permite editar el check de politica de seguridad del usuario",
+        "x-stoplight": {
+          "id": "ncnjbtif8j8gv"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/primera-activacion": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Activa un usuario",
+        "operationId": "postPrimeraActivacionPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- LOG_0003: El usuario ya está activo\n - LOG_0006: La password no cumple los criterios de seguridad\n - LOG_0007: La contraseña no puede coincidir con alguna de las últimas 5 contraseñas del usuario\n - LOG_0008: La password no es válida porque está incluida en la lista de password inseguras\n - LOG_0027: El usuario ya está activo\n - LOG_0004: No se puede activar un usuario federado"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "activar_usuario"
+        ],
+        "x-permisos": false,
+        "description": "Activa un usuario",
+        "x-stoplight": {
+          "id": "l8btktyvlkfmd"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/login/v1/usuarios/{idUsuario}/reenviar-correo-activacion": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Reenvia el correo de activación",
+        "operationId": "postReenviarCorreoActivacionPorIdUsuario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden \n - LOG_0003: El usuario ya está activo"
+          }
+        },
+        "description": "Reenvia el correo de activación",
+        "x-stoplight": {
+          "id": "jc61eoy7oaf63"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccesosDtoSolicitudResponse": {
+        "type": "object",
+        "properties": {
+          "idSolicitud": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoSolicitudEnum"
+          }
+        },
+        "x-stoplight": {
+          "id": "jun15morxkh6o"
+        }
+      },
+      "ActionTokenDtoResponse": {
+        "type": "object",
+        "properties": {
+          "actionToken": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "kzt1e5ew2p617"
+        }
+      },
+      "ActivarAccesoDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idUsuarioAcceso": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idUsuario": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "zuzbwqpan9wht"
+        }
+      },
+      "ActivarDtoRequest": {
+        "required": [
+          "activar"
+        ],
+        "type": "object",
+        "properties": {
+          "activar": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "bylnfzk3heh2w"
+        }
+      },
+      "ActivarDtoResponse": {
+        "type": "object",
+        "properties": {
+          "activar": {
+            "type": "boolean"
+          },
+          "idUsuario": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "uytkepiza0d3l"
+        }
+      },
+      "ArchivoDtoResponse": {
+        "required": [
+          "idTipoEntidad",
+          "idEntidad",
+          "observaciones",
+          "nombre"
+        ],
+        "type": "object",
+        "properties": {
+          "idTipoEntidad": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idEntidad": {
+            "type": "string"
+          },
+          "idTipoEntidadSecundaria": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idEntidadSecundaria": {
+            "type": "string"
+          },
+          "observaciones": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "esCreacion": {
+            "type": "boolean"
+          },
+          "extension": {
+            "type": "string"
+          },
+          "numeroPaginas": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "fechaInsercion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "fechaModificacion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "tamano": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "url": {
+            "type": "string"
+          },
+          "idEmpresa": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "hfin8z2qyhivy"
+        }
+      },
+      "ComprobarAutenticacionDtoResponse": {
+        "type": "object",
+        "properties": {
+          "urlLoginSaml": {
+            "type": "string"
+          },
+          "multifactor": {
+            "$ref": "#/components/schemas/MultifactorEnum"
+          }
+        },
+        "x-stoplight": {
+          "id": "dbhmoxdgen10z"
+        }
+      },
+      "ComunEmpresaDtoResponse": {
+        "required": [
+          "cif",
+          "nombre",
+          "paisCif",
+          "observaciones",
+          "idGrupoEntornos"
+        ],
+        "type": "object",
+        "properties": {
+          "cif": {
+            "maxLength": 25,
+            "minLength": 3,
+            "type": "string"
+          },
+          "nombre": {
+            "maxLength": 255,
+            "minLength": 3,
+            "type": "string"
+          },
+          "paisCif": {
+            "format": "int32",
+            "maximum": 1000,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "observaciones": {
+            "maxLength": 4096,
+            "type": "string"
+          },
+          "idEmpresa": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombreUsuario": {
+            "type": "string"
+          },
+          "apellidosUsuario": {
+            "type": "string"
+          },
+          "emailUsuario": {
+            "type": "string"
+          },
+          "tipoEmpresa": {
+            "$ref": "#/components/schemas/TipoSolicitudAltaEnum"
+          },
+          "entornos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComunEntornoDtoResponse"
+            }
+          },
+          "fechaCreacion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "fechaUltimoAcceso": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "razonSocial": {
+            "type": "string"
+          },
+          "zonaHoraria": {
+            "$ref": "#/components/schemas/ZoneId"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "idGrupoEntornos": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "ot7yjfbeu6vba"
+        }
+      },
+      "ComunEntornoDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idEntorno": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idModulo": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EntornoEstadoEnum"
+          }
+        },
+        "x-stoplight": {
+          "id": "1h30kdoc94d4b"
+        }
+      },
+      "ConfigV3DtoRequest": {
+        "required": [
+          "baseDatos",
+          "nombreEmpresa",
+          "nombreEsquema",
+          "tipo",
+          "usuario"
+        ],
+        "type": "object",
+        "properties": {
+          "baseDatos": {
+            "type": "string"
+          },
+          "nombreEmpresa": {
+            "type": "string"
+          },
+          "nombreEsquema": {
+            "type": "string"
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/RolUsuarioV3Enum"
+          },
+          "usuario": {
+            "type": "string"
+          },
+          "accedeMetacontratas": {
+            "type": "boolean"
+          },
+          "accedeControlAcceso": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "3gkgeb79exx49"
+        }
+      },
+      "ConfigV3DtoResponse": {
+        "type": "object",
+        "properties": {
+          "baseDatos": {
+            "type": "string"
+          },
+          "idUsuario": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idUsuarioAcceso": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombreEmpresa": {
+            "type": "string"
+          },
+          "nombreEsquema": {
+            "type": "string"
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/RolUsuarioV3Enum"
+          },
+          "usuario": {
+            "type": "string"
+          },
+          "accedeMetacontratas": {
+            "type": "boolean"
+          },
+          "accedeControlAcceso": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "54tmjkvkmcxnt"
+        }
+      },
+      "ConfiguracionDtoRequest": {
+        "required": [
+          "idConfiguracion",
+          "valor"
+        ],
+        "type": "object",
+        "properties": {
+          "idConfiguracion": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "valor": {
+            "maxLength": 1024,
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "3gdfyjprk1jbj"
+        }
+      },
+      "ConfiguracionDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idConfiguracion": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "clave": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "idUsuario": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "6vo69hv92mv8f"
+        }
+      },
+      "CorreoDtoRequest": {
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "stkrbgdhfa8sz"
+        }
+      },
+      "DayOfWeek": {
+        "enum": [
+          "MONDAY",
+          "TUESDAY",
+          "WEDNESDAY",
+          "THURSDAY",
+          "FRIDAY",
+          "SATURDAY",
+          "SUNDAY"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "21l7xwkxgvsbr"
+        }
+      },
+      "DesactivarAccesoDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idUsuarioAcceso": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idUsuario": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "x4gwan7wa3inu"
+        }
+      },
+      "DominioDtoRequest": {
+        "required": [
+          "dominio",
+          "keycloakAlias"
+        ],
+        "type": "object",
+        "properties": {
+          "dominio": {
+            "type": "string"
+          },
+          "rolDefecto": {
+            "$ref": "#/components/schemas/RolUsuarioLoginEnum"
+          },
+          "keycloakAlias": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "sna3q32wrrqqe"
+        }
+      },
+      "DominioDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idDominio": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "dominio": {
+            "type": "string"
+          },
+          "rolDefecto": {
+            "$ref": "#/components/schemas/RolUsuarioLoginEnum"
+          },
+          "keycloakAlias": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "0xw9oqxkk0doh"
+        }
+      },
+      "Duration": {
+        "format": "duration",
+        "type": "string",
+        "example": "P1D",
+        "x-stoplight": {
+          "id": "7iao1myr1l43s"
+        }
+      },
+      "EntornoEstadoEnum": {
+        "enum": [
+          "CREADO",
+          "PENDIENTE",
+          "BORRANDO"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "i9p71y7q78jhu"
+        }
+      },
+      "EntornosEntornoDtoResponse": {
+        "required": [
+          "idModulo",
+          "idEmpresa"
+        ],
+        "type": "object",
+        "properties": {
+          "idModulo": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idEmpresa": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idEntorno": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "estado": {
+            "type": "string"
+          },
+          "fechaPeticion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "activo": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "x0xqwkizp1vwy"
+        }
+      },
+      "EntradasResponseDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoLogEntradaEnum"
+          },
+          "fechaEntrada": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "ip": {
+            "type": "string"
+          },
+          "mensaje": {
+            "type": "string"
+          },
+          "navegador": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "7ndbeo12yq5bi"
+        }
+      },
+      "EstadoLogEntradaEnum": {
+        "enum": [
+          "ERROR",
+          "OK"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "0w5vmrb9tvmnm"
+        }
+      },
+      "EstadoSolicitudEnum": {
+        "enum": [
+          "PENDIENTE",
+          "RECHAZADA",
+          "CONFIRMADA"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "e5cc9x202dho3"
+        }
+      },
+      "FavoritoDtoRequest": {
+        "type": "object",
+        "properties": {
+          "favorito": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "d0jms4kuhftvg"
+        }
+      },
+      "FavoritoDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idUsuario": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idUsuarioAcceso": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "favorito": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "ffc8rrs7cvygs"
+        }
+      },
+      "GrupoEntornoUsuariosDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idGrupoEntornos": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "listadoInsertados": {
+            "type": "array",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "listadoEliminados": {
+            "type": "array",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "xj9u26q0n7621"
+        }
+      },
+      "GrupoEntornosDtoResponse": {
+        "required": [
+          "idGrupoEntornos",
+          "idEmpresaAdministradora",
+          "nombre"
+        ],
+        "type": "object",
+        "properties": {
+          "idGrupoEntornos": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idEmpresaAdministradora": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "v9xeeleac24vb"
+        }
+      },
+      "IdiomaDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idIdioma": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "codigo": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "vzg4djqpdljrw"
+        }
+      },
+      "Instant": {
+        "format": "date-time",
+        "type": "string",
+        "example": "2022-03-10T16:15:50Z",
+        "x-stoplight": {
+          "id": "g1mhkp8cb9t20"
+        }
+      },
+      "InvitacionDtoRequest": {
+        "required": [
+          "correo"
+        ],
+        "type": "object",
+        "properties": {
+          "correo": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "8hcwdq0krwqwg"
+        }
+      },
+      "InvitacionDtoResponse": {
+        "required": [
+          "correo"
+        ],
+        "type": "object",
+        "properties": {
+          "correo": {
+            "type": "string"
+          },
+          "idUsuario": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "o1lf7icwo4ji1"
+        }
+      },
+      "LocalDateTime": {
+        "format": "date-time",
+        "type": "string",
+        "example": "2022-03-10T12:15:50",
+        "x-stoplight": {
+          "id": "iyg322p6i3x49"
+        }
+      },
+      "LocalTime": {
+        "format": "local-time",
+        "type": "string",
+        "externalDocs": {
+          "description": "As defined by 'partial-time' in RFC3339",
+          "url": "https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6"
+        },
+        "example": "13:45:30.123456789",
+        "x-stoplight": {
+          "id": "adcsab1dacbl7"
+        }
+      },
+      "LoginDtoRequest": {
+        "required": [
+          "usuario",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "usuario": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "otp": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "ukga22ijtnx1i"
+        }
+      },
+      "LoginEmpresaDtoResponse": {
+        "type": "object",
+        "properties": {
+          "identificador": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "autonomo": {
+            "type": "boolean"
+          },
+          "idEmpresa": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idPaisIdentificador": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idGrupoEntornos": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "h5eykr0sxjewp"
+        }
+      },
+      "Month": {
+        "enum": [
+          "JANUARY",
+          "FEBRUARY",
+          "MARCH",
+          "APRIL",
+          "MAY",
+          "JUNE",
+          "JULY",
+          "AUGUST",
+          "SEPTEMBER",
+          "OCTOBER",
+          "NOVEMBER",
+          "DECEMBER"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "8g9tey9goe1pj"
+        }
+      },
+      "MultifactorEnum": {
+        "enum": [
+          "NINGUNO",
+          "OTP"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "iefuafzrwf62l"
+        }
+      },
+      "OtpDtoRequest": {
+        "required": [
+          "secreto",
+          "nombreDispositivo",
+          "codigoInicial"
+        ],
+        "type": "object",
+        "properties": {
+          "secreto": {
+            "type": "string"
+          },
+          "nombreDispositivo": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "codigoInicial": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "6r7kphqxo64w8"
+        }
+      },
+      "OtpDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idCredencial": {
+            "type": "string"
+          },
+          "nombreDispositivo": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          }
+        },
+        "x-stoplight": {
+          "id": "yr90mu4cw32tv"
+        }
+      },
+      "OtpEditDtoRequest": {
+        "required": [
+          "nombreDispositivo"
+        ],
+        "type": "object",
+        "properties": {
+          "nombreDispositivo": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "xb6f1f9mxs91i"
+        }
+      },
+      "OtpQrDtoResponse": {
+        "type": "object",
+        "properties": {
+          "secreto": {
+            "type": "string"
+          },
+          "codigoQr": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "xgvm53yqqywqf"
+        }
+      },
+      "PasswordDtoRequest": {
+        "required": [
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "password": {
+            "maxLength": 255,
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "2n1pr5p5tqfoc"
+        }
+      },
+      "PoliticaSeguridadLeidaDtoRequest": {
+        "type": "object",
+        "properties": {
+          "leida": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "kel3dm7zycnkh"
+        }
+      },
+      "PoliticaSeguridadLeidaDtoResponse": {
+        "type": "object",
+        "properties": {
+          "leida": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "tw9vib05p7yyo"
+        }
+      },
+      "RequestBodyDobleListaInteger": {
+        "required": [
+          "listadoInsertar",
+          "listadoEliminar"
+        ],
+        "type": "object",
+        "properties": {
+          "listadoInsertar": {
+            "type": "array",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "listadoEliminar": {
+            "type": "array",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "cx2rgxqosjoja"
+        }
+      },
+      "RolAccesoEnum": {
+        "enum": [
+          "EMPRESA_EXTERNO",
+          "EMPRESA_INTERNO",
+          "EMPLEADO_INTERNO",
+          "EMPLEADO_EXTERNO",
+          "SUPERADMINISTRADOR",
+          "ADMINISTRADOR_GRUPO_ENTORNOS"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "wig73kp9n1ukt"
+        }
+      },
+      "RolUsuarioEntornoEnum": {
+        "enum": [
+          "EMPRESA_INTERNO",
+          "EMPRESA_EXTERNO",
+          "EMPLEADO_INTERNO",
+          "EMPLEADO_EXTERNO",
+          "SUPERADMINISTRADOR",
+          "ADMINISTRADOR_GRUPO_ENTORNOS"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "tldwbnnzxns64"
+        }
+      },
+      "RolUsuarioLoginEnum": {
+        "enum": [
+          "NO_ADMINISTRADOR",
+          "SUPERADMINISTRADOR",
+          "DIOS",
+          "ADMINISTRADOR_GRUPO_ENTORNOS"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "sckldamt96je5"
+        }
+      },
+      "RolUsuarioV3Enum": {
+        "enum": [
+          "G",
+          "S",
+          "C"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "khyfav1uk782t"
+        }
+      },
+      "TimeDefinition": {
+        "enum": [
+          "UTC",
+          "WALL",
+          "STANDARD"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "mpeqd4o058i7y"
+        }
+      },
+      "TipoAccesoEnum": {
+        "enum": [
+          "ACCESO",
+          "SOLICITUD"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "6rzqb4fgm00ep"
+        }
+      },
+      "TipoSolicitudAltaEnum": {
+        "enum": [
+          "EMPRESA",
+          "AUTONOMO"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "cb1ruejzlnb02"
+        }
+      },
+      "TokenDtoRequest": {
+        "required": [
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "token": {
+            "maxLength": 128,
+            "minLength": 128,
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "eclqbh07o0q64"
+        }
+      },
+      "TokenInternoDesdeAccessTokenDtoRequest": {
+        "required": [
+          "jwt"
+        ],
+        "type": "object",
+        "properties": {
+          "jwt": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "v51cede2dx2gp"
+        }
+      },
+      "TokenInternoDtoRequest": {
+        "type": "object",
+        "properties": {
+          "idEmpresa": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idEntorno": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idUsuario": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "gwi9dgt3pny5f"
+        }
+      },
+      "TokenPublicoDtoRequest": {
+        "required": [
+          "rol",
+          "claimsAdicionales"
+        ],
+        "type": "object",
+        "properties": {
+          "idUsuario": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "correo": {
+            "type": "string"
+          },
+          "idEntorno": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idEmpresa": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "rol": {
+            "type": "string"
+          },
+          "claimsAdicionales": {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        },
+        "x-stoplight": {
+          "id": "d4rclk5cdscln"
+        }
+      },
+      "TokensDtoResponse": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "expiresIn": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "refreshToken": {
+            "type": "string"
+          },
+          "idToken": {
+            "type": "string"
+          },
+          "numeroErrores": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "bmgkelvad2lwk"
+        }
+      },
+      "UsuarioAccesoDtoRequest": {
+        "required": [
+          "idEmpresa",
+          "observaciones",
+          "idUsuarioEntorno",
+          "idEntorno",
+          "idAplicacion",
+          "rol"
+        ],
+        "type": "object",
+        "properties": {
+          "idEmpresa": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idEmpresaUsuario": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "observaciones": {
+            "type": "string"
+          },
+          "configV3": {
+            "$ref": "#/components/schemas/ConfigV3DtoRequest"
+          },
+          "idUsuarioEntorno": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idEntorno": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idAplicacion": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "rol": {
+            "$ref": "#/components/schemas/RolAccesoEnum"
+          }
+        },
+        "x-stoplight": {
+          "id": "csgp8fdrq4rkt"
+        }
+      },
+      "UsuarioAccesoDtoRequestUpdate": {
+        "required": [
+          "observaciones"
+        ],
+        "type": "object",
+        "properties": {
+          "observaciones": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "j4qfozoru1bqw"
+        }
+      },
+      "UsuarioAccesoDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idUsuario": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idEntorno": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idAplicacion": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idUsuarioAcceso": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idUsuarioEntorno": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "configV3": {
+            "$ref": "#/components/schemas/ConfigV3DtoResponse"
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "observaciones": {
+            "type": "string"
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/LoginEmpresaDtoResponse"
+          },
+          "empresaUsuario": {
+            "$ref": "#/components/schemas/LoginEmpresaDtoResponse"
+          },
+          "tipoAcceso": {
+            "$ref": "#/components/schemas/TipoAccesoEnum"
+          },
+          "solicitud": {
+            "$ref": "#/components/schemas/AccesosDtoSolicitudResponse"
+          },
+          "modulos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntornosEntornoDtoResponse"
+            }
+          },
+          "favorito": {
+            "type": "boolean"
+          },
+          "fechaActivacion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "fechaUltimoAcceso": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "rol": {
+            "$ref": "#/components/schemas/RolUsuarioEntornoEnum"
+          },
+          "esUsuarioAge": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "l7j3znruya0ul"
+        }
+      },
+      "UsuarioAccesoDtoResponseEntorno": {
+        "type": "object",
+        "properties": {
+          "idUsuarioAcceso": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idUsuarioEntorno": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/ComunEmpresaDtoResponse"
+          },
+          "empresaUsuario": {
+            "$ref": "#/components/schemas/ComunEmpresaDtoResponse"
+          },
+          "fechaActivacion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "fechaUltimoAcceso": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "rol": {
+            "$ref": "#/components/schemas/RolUsuarioEntornoEnum"
+          },
+          "usuario": {
+            "$ref": "#/components/schemas/UsuarioDtoResponse"
+          }
+        },
+        "x-stoplight": {
+          "id": "uqkowfe8gjy9r"
+        }
+      },
+      "UsuarioDtoRequest": {
+        "required": [
+          "email",
+          "nombre",
+          "apellido1",
+          "apellido2",
+          "idPaisTelefono",
+          "telefono",
+          "newsletter",
+          "idIdioma"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "maxLength": 255,
+            "type": "string"
+          },
+          "nombre": {
+            "maxLength": 128,
+            "type": "string"
+          },
+          "apellido1": {
+            "maxLength": 255,
+            "type": "string"
+          },
+          "apellido2": {
+            "maxLength": 255,
+            "type": "string"
+          },
+          "idPaisTelefono": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "telefono": {
+            "maxLength": 45,
+            "type": "string"
+          },
+          "newsletter": {
+            "type": "boolean"
+          },
+          "invitacion": {
+            "type": "boolean"
+          },
+          "idIdioma": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "48372y1eq153b"
+        }
+      },
+      "UsuarioDtoRequestUpdate": {
+        "required": [
+          "nombre",
+          "apellido1",
+          "apellido2",
+          "idPaisTelefono",
+          "telefono",
+          "newsletter",
+          "idIdioma"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "apellido1": {
+            "type": "string"
+          },
+          "apellido2": {
+            "type": "string"
+          },
+          "idPaisTelefono": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "newsletter": {
+            "type": "boolean"
+          },
+          "idIdioma": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "5azq1kgab54u0"
+        }
+      },
+      "UsuarioDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idUsuario": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "email": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "apellido1": {
+            "type": "string"
+          },
+          "apellido2": {
+            "type": "string"
+          },
+          "rol": {
+            "type": "string"
+          },
+          "idPaisTelefono": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "federado": {
+            "type": "boolean"
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "newsletter": {
+            "type": "boolean"
+          },
+          "diasValidezPassword": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "fechaActivacion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "fechaCreacion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "fechaUltimoAcceso": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "invitacion": {
+            "type": "boolean"
+          },
+          "idioma": {
+            "$ref": "#/components/schemas/IdiomaDtoResponse"
+          },
+          "politicaSeguridad": {
+            "type": "boolean"
+          },
+          "passwordCaducada": {
+            "type": "boolean"
+          },
+          "fechaCaducidadPassword": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "numErrores": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "erroresAccesoExcedidos": {
+            "type": "boolean"
+          },
+          "multifactor": {
+            "$ref": "#/components/schemas/MultifactorEnum"
+          },
+          "uuid": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "dke4tnqhx4aj8"
+        }
+      },
+      "UsuarioDtoResponseListado": {
+        "type": "object",
+        "properties": {
+          "idUsuario": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "email": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "apellido1": {
+            "type": "string"
+          },
+          "apellido2": {
+            "type": "string"
+          },
+          "rol": {
+            "type": "string"
+          },
+          "idPaisTelefono": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "idIdioma": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "federado": {
+            "type": "boolean"
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "newsletter": {
+            "type": "boolean"
+          },
+          "fechaActivacion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "fechaCreacion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "fechaUltimoAcceso": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "numeroAccesos": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "grupoEntornos": {
+            "$ref": "#/components/schemas/GrupoEntornosDtoResponse"
+          }
+        },
+        "x-stoplight": {
+          "id": "j72c2qj6ni1c8"
+        }
+      },
+      "UsuarioEmpresaDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idUsuario": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "email": {
+            "type": "string"
+          },
+          "fechaActivacion": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "s5ipbgojg3wda"
+        }
+      },
+      "UsuarioRolDtoRequest": {
+        "required": [
+          "rol"
+        ],
+        "type": "object",
+        "properties": {
+          "rol": {
+            "$ref": "#/components/schemas/RolUsuarioLoginEnum"
+          }
+        },
+        "x-stoplight": {
+          "id": "altl735cdny35"
+        }
+      },
+      "ZoneId": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "rules": {
+            "$ref": "#/components/schemas/ZoneRules"
+          }
+        },
+        "x-stoplight": {
+          "id": "fdaugdmg4pnx9"
+        }
+      },
+      "ZoneOffset": {
+        "type": "object",
+        "properties": {
+          "totalSeconds": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "rules": {
+            "$ref": "#/components/schemas/ZoneRules"
+          }
+        },
+        "x-stoplight": {
+          "id": "p4t6w6d08j38m"
+        }
+      },
+      "ZoneOffsetTransition": {
+        "type": "object",
+        "properties": {
+          "epochSecond": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "transition": {
+            "$ref": "#/components/schemas/LocalDateTime"
+          },
+          "offsetBefore": {
+            "$ref": "#/components/schemas/ZoneOffset"
+          },
+          "offsetAfter": {
+            "$ref": "#/components/schemas/ZoneOffset"
+          },
+          "instant": {
+            "$ref": "#/components/schemas/Instant"
+          },
+          "dateTimeBefore": {
+            "$ref": "#/components/schemas/LocalDateTime"
+          },
+          "dateTimeAfter": {
+            "$ref": "#/components/schemas/LocalDateTime"
+          },
+          "duration": {
+            "$ref": "#/components/schemas/Duration"
+          },
+          "durationSeconds": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "gap": {
+            "type": "boolean"
+          },
+          "overlap": {
+            "type": "boolean"
+          },
+          "validOffsets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ZoneOffset"
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "tbw46begpa5i1"
+        }
+      },
+      "ZoneOffsetTransitionRule": {
+        "type": "object",
+        "properties": {
+          "month": {
+            "$ref": "#/components/schemas/Month"
+          },
+          "dom": {
+            "format": "byte",
+            "type": "string"
+          },
+          "dow": {
+            "$ref": "#/components/schemas/DayOfWeek"
+          },
+          "time": {
+            "$ref": "#/components/schemas/LocalTime"
+          },
+          "timeEndOfDay": {
+            "type": "boolean"
+          },
+          "timeDefinition": {
+            "$ref": "#/components/schemas/TimeDefinition"
+          },
+          "standardOffset": {
+            "$ref": "#/components/schemas/ZoneOffset"
+          },
+          "offsetBefore": {
+            "$ref": "#/components/schemas/ZoneOffset"
+          },
+          "offsetAfter": {
+            "$ref": "#/components/schemas/ZoneOffset"
+          },
+          "dayOfMonthIndicator": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "dayOfWeek": {
+            "$ref": "#/components/schemas/DayOfWeek"
+          },
+          "localTime": {
+            "$ref": "#/components/schemas/LocalTime"
+          },
+          "midnightEndOfDay": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "yshcrt8fz0sdb"
+        }
+      },
+      "ZoneRules": {
+        "type": "object",
+        "properties": {
+          "standardTransitions": {
+            "type": "array",
+            "items": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          "standardOffsets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ZoneOffset"
+            }
+          },
+          "savingsInstantTransitions": {
+            "type": "array",
+            "items": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          "savingsLocalTransitions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalDateTime"
+            }
+          },
+          "wallOffsets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ZoneOffset"
+            }
+          },
+          "lastRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ZoneOffsetTransitionRule"
+            }
+          },
+          "fixedOffset": {
+            "type": "boolean"
+          },
+          "transitions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ZoneOffsetTransition"
+            }
+          },
+          "transitionRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ZoneOffsetTransitionRule"
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "2cn59slimbgm1"
+        }
+      },
+      "ZonedDateTime": {
+        "format": "date-time",
+        "type": "string",
+        "example": "2022-03-10T12:15:50-04:00",
+        "x-stoplight": {
+          "id": "tqsgh1mnmt8cl"
+        }
+      }
+    },
+    "securitySchemes": {
+      "jwt": {
+        "type": "http",
+        "description": "Authentication",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "parameters": {
+      "X-Timezone": {
+        "name": "X-Timezone",
+        "in": "header",
+        "description": "Zona horaria desde la que se hace la petición",
+        "required": true,
+        "schema": {
+          "default": "Europe/Madrid",
+          "type": "string"
+        }
+      },
+      "idDominio": {
+        "name": "idDominio",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": "TODO: add description"
+      },
+      "idEmpresa": {
+        "name": "idEmpresa",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": "TODO: add description"
+      },
+      "listadoRoles": {
+        "name": "listadoRoles",
+        "in": "query",
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/RolUsuarioLoginEnum"
+          }
+        },
+        "description": "TODO: add description"
+      },
+      "idEntorno": {
+        "name": "idEntorno",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": "TODO: add description"
+      },
+      "idsUsuarioEntorno": {
+        "name": "idsUsuarioEntorno",
+        "in": "query",
+        "schema": {
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "description": "TODO: add description"
+      },
+      "Refresh-Token": {
+        "name": "Refresh-Token",
+        "in": "header",
+        "schema": {
+          "type": "string"
+        },
+        "description": "TODO: add description"
+      },
+      "idGrupoEntornos": {
+        "name": "idGrupoEntornos",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": "TODO: add description"
+      },
+      "Access-Token": {
+        "name": "Access-Token",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "TODO: add description"
+      },
+      "listaIds": {
+        "name": "listaIds",
+        "in": "query",
+        "schema": {
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "description": "TODO: add description"
+      },
+      "rol": {
+        "name": "rol",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/RolUsuarioLoginEnum"
+        },
+        "description": "TODO: add description"
+      },
+      "usuario": {
+        "name": "usuario",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        },
+        "description": "TODO: add description"
+      },
+      "codigoAutorizacion": {
+        "name": "codigoAutorizacion",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "TODO: add description"
+      },
+      "Id-Token": {
+        "name": "Id-Token",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "TODO: add description"
+      },
+      "idUsuario": {
+        "name": "idUsuario",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": "TODO: add description"
+      },
+      "idAcceso": {
+        "name": "idAcceso",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": "TODO: add description"
+      },
+      "fechaDesde": {
+        "name": "fechaDesde",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        },
+        "description": "TODO: add description"
+      },
+      "fechaHasta": {
+        "name": "fechaHasta",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        },
+        "description": "TODO: add description"
+      },
+      "idCredencial": {
+        "name": "idCredencial",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "TODO: add description"
+      }
+    }
+  }
+}

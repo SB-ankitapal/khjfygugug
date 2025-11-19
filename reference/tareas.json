@@ -1,0 +1,3485 @@
+{
+  "openapi": "3.0.3",
+  "x-stoplight": {
+    "id": "727ktt6ep7pvn"
+  },
+  "info": {
+    "title": "tareas API",
+    "version": "1.0-SNAPSHOT",
+    "description": "API del microservicio de tareas",
+    "license": {
+      "name": "Proprietary - Internal Use Only",
+      "url": "https://v4.metacontratas.com/"
+    },
+    "contact": {
+      "email": "soporte.tecnico@metadata.es",
+      "name": "Metadata S.L.",
+      "url": "https://v4.metacontratas.com/"
+    }
+  },
+  "tags": [
+    {
+      "name": "Comentario",
+      "description": "Servicio de comentario"
+    },
+    {
+      "name": "Dashboard",
+      "description": "Servicio de dashboard"
+    },
+    {
+      "name": "Estado",
+      "description": "Servicio de estado"
+    },
+    {
+      "name": "Kanban",
+      "description": "Servicio de kanban"
+    },
+    {
+      "name": "Origen",
+      "description": "Servicio de origen"
+    },
+    {
+      "name": "Proyecto",
+      "description": "Servicio de proyecto"
+    },
+    {
+      "name": "Tarea",
+      "description": "Servicio de tarea"
+    },
+    {
+      "name": "Usuario Entorno",
+      "description": "Servicio de usuarios entornos"
+    }
+  ],
+  "paths": {
+    "/tareas/v1/comentarios/{idComentario}": {
+      "put": {
+        "tags": [
+          "Comentario"
+        ],
+        "summary": "Actualiza un comentario según su id",
+        "operationId": "putComentarioPorIdComentario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComentarioDtoActualizacionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComentarioDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "TAR_0015: No se puede realizar la acción ya que los usuarios entornos no coinciden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Actualiza un comentario según su id",
+        "x-stoplight": {
+          "id": "bj341tbdltgsv"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idComentario"
+        }
+      ]
+    },
+    "/tareas/v1/comentarios/{idComentario}/borrar": {
+      "post": {
+        "tags": [
+          "Comentario"
+        ],
+        "summary": "Elimina con borrado lógico un comentario según su id, marcando el flag borrado como true",
+        "operationId": "postBorrarPorIdComentario",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComentarioDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "TAR_0018: Si no se especifica un responsable, el estado de la tarea solo puede ser de tipo INICIAL"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Elimina con borrado lógico un comentario según su id, marcando el flag borrado como true",
+        "x-stoplight": {
+          "id": "hemrbj65utvao"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idComentario"
+        }
+      ]
+    },
+    "/tareas/v1/dashboard/agrupadas-por-estado": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "Obtener las tareas activas agrupadas por estado",
+        "operationId": "getAgrupadasPorEstadoDashboard",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtener las tareas activas agrupadas por estado",
+        "x-stoplight": {
+          "id": "ofbblz7j0ysx7"
+        }
+      }
+    },
+    "/tareas/v1/dashboard/agrupadas-por-prioridad": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "Obtener las tareas activas agrupadas por prioridad",
+        "operationId": "getAgrupadasPorPrioridadDashboard",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtener las tareas activas agrupadas por prioridad",
+        "x-stoplight": {
+          "id": "f123lbhjibbaw"
+        }
+      }
+    },
+    "/tareas/v1/dashboard/agrupadas-por-proyecto": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "Obtener las tareas activas agrupadas por proyecto",
+        "operationId": "getAgrupadasPorProyectoDashboard",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtener las tareas activas agrupadas por proyecto",
+        "x-stoplight": {
+          "id": "42c73s82lqgd7"
+        }
+      }
+    },
+    "/tareas/v1/dashboard/agrupadas-por-responsable": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "Obtener un listado de usuarios entorno y su cantidad de tareas activas",
+        "operationId": "getAgrupadasPorResponsableDashboard",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioEntornoTareaDtoDashboard"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtener un listado de usuarios entorno y su cantidad de tareas activas",
+        "x-stoplight": {
+          "id": "6cfiq9sm3pogs"
+        }
+      }
+    },
+    "/tareas/v1/dashboard/cercanas-a-finalizar": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "Obtener tareas activas próximas a finalizar",
+        "operationId": "getCercanasAFinalizarDashboard",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TareaDtoListadoDashboard"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtener tareas activas próximas a finalizar",
+        "x-stoplight": {
+          "id": "cwlcx1hvdy0ua"
+        }
+      }
+    },
+    "/tareas/v1/dashboard/creadas-este-mes": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "Obtiene la cantidad de tareas activas creadas este mes",
+        "operationId": "getCreadasEsteMesDashboard",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtiene la cantidad de tareas activas creadas este mes",
+        "x-stoplight": {
+          "id": "dojos6n5bl6ch"
+        }
+      }
+    },
+    "/tareas/v1/dashboard/finalizadas-este-mes": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "Obtener las tareas finalizadas en el mes actual",
+        "operationId": "getFinalizadasEsteMesDashboard",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtener las tareas finalizadas en el mes actual",
+        "x-stoplight": {
+          "id": "t0wa1s40idbbh"
+        }
+      }
+    },
+    "/tareas/v1/dashboard/pendientes": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "Obtener tareas activas de estado inicial",
+        "operationId": "getPendientesDashboard",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtener tareas activas de estado inicial",
+        "x-stoplight": {
+          "id": "p9bfqqj1kva27"
+        }
+      }
+    },
+    "/tareas/v1/estados": {
+      "get": {
+        "tags": [
+          "Estado"
+        ],
+        "summary": "Obtiene un listado de estados",
+        "operationId": "getEstados",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EstadoDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtiene un listado de estados",
+        "x-stoplight": {
+          "id": "pn8euvdrvej4w"
+        }
+      }
+    },
+    "/tareas/v1/kanban": {
+      "get": {
+        "tags": [
+          "Kanban"
+        ],
+        "summary": "Obtener tareas activas",
+        "operationId": "getKanban",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TareaDtoListadoKanban"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtener tareas activas",
+        "x-stoplight": {
+          "id": "t538yukdp2k7k"
+        }
+      }
+    },
+    "/tareas/v1/origenes": {
+      "get": {
+        "tags": [
+          "Origen"
+        ],
+        "summary": "Obtiene un listado de orígenes",
+        "operationId": "getOrigenes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/nombre"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrigenDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtiene un listado de orígenes",
+        "x-stoplight": {
+          "id": "7vi27o7ky1a5p"
+        }
+      },
+      "post": {
+        "tags": [
+          "Origen"
+        ],
+        "summary": "Crea un origen",
+        "operationId": "postOrigenes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrigenDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrigenDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Ya existe un origen con nombre: {nombre}"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Crea un origen",
+        "x-stoplight": {
+          "id": "2fz3snewhrgnh"
+        }
+      }
+    },
+    "/tareas/v1/origenes/{idOrigen}": {
+      "put": {
+        "tags": [
+          "Origen"
+        ],
+        "summary": "Actualiza origen",
+        "operationId": "putOrigenPorIdOrigen",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrigenDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrigenDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "TAR_0001: Ya existe un origen con nombre: %s"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Actualiza origen",
+        "x-stoplight": {
+          "id": "r9037kfoi65ur"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Origen"
+        ],
+        "summary": "Elimina orígenes por id",
+        "operationId": "deleteOrigenPorIdOrigen",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrigenDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "TAR_0010: No se puede eliminar un origen que esté siendo usado por una tarea"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Elimina orígenes por id",
+        "x-stoplight": {
+          "id": "b556o5j7n2jyo"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idOrigen"
+        }
+      ]
+    },
+    "/tareas/v1/origenes/{idOrigen}/activar": {
+      "post": {
+        "tags": [
+          "Origen"
+        ],
+        "summary": "Activa un origen",
+        "operationId": "postActivarPorIdOrigen",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "No se puede activar un origen interno"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Activa un origen",
+        "x-stoplight": {
+          "id": "r9h1062l0mq2m"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idOrigen"
+        }
+      ]
+    },
+    "/tareas/v1/origenes/{idOrigen}/desactivar": {
+      "post": {
+        "tags": [
+          "Origen"
+        ],
+        "summary": "Desactiva un origen",
+        "operationId": "postDesactivarPorIdOrigen",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "No se puede desactivar un origen interno"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Desactiva un origen",
+        "x-stoplight": {
+          "id": "2ct3y1fj69pno"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idOrigen"
+        }
+      ]
+    },
+    "/tareas/v1/proyectos": {
+      "get": {
+        "tags": [
+          "Proyecto"
+        ],
+        "summary": "Obtiene un listado de proyectos",
+        "operationId": "getProyectos",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/nombre"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProyectoDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtiene un listado de proyectos",
+        "x-stoplight": {
+          "id": "f03gplbmqwce8"
+        }
+      },
+      "post": {
+        "tags": [
+          "Proyecto"
+        ],
+        "summary": "Crea un nuevo proyecto",
+        "operationId": "postProyectos",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProyectoDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProyectoDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "TAR_0002: Ya existe un proyecto con nombre: %1s"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Crea un nuevo proyecto",
+        "x-stoplight": {
+          "id": "pa7oq23izmjye"
+        }
+      }
+    },
+    "/tareas/v1/proyectos/{idProyecto}": {
+      "put": {
+        "tags": [
+          "Proyecto"
+        ],
+        "summary": "Actualiza proyectos. Persiste en base de datos la nueva información recibida para un proyecto concreto y comprueba que el nuevo nombre a modificar no existe en la BBDD",
+        "operationId": "putProyectoPorIdProyecto",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProyectoDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProyectoDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "TAR_0002: Ya existe un proyecto con nombre: %1s"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Actualiza proyectos. Persiste en base de datos la nueva información recibida para un proyecto concreto y comprueba que el nuevo nombre a modificar no existe en la BBDD",
+        "x-stoplight": {
+          "id": "f4u9uyfpxwyzp"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Proyecto"
+        ],
+        "summary": "Elimina proyectos por id",
+        "operationId": "deleteProyectoPorIdProyecto",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProyectoDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "TAR_0011: No se puede eliminar un proyecto que esté siendo usado por una tarea"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Elimina proyectos por id",
+        "x-stoplight": {
+          "id": "meteipet498xg"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idProyecto"
+        }
+      ]
+    },
+    "/tareas/v1/proyectos/{idProyecto}/activar": {
+      "post": {
+        "tags": [
+          "Proyecto"
+        ],
+        "summary": "Activa un proyecto",
+        "operationId": "postActivarPorIdProyecto",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Activa un proyecto",
+        "x-stoplight": {
+          "id": "bnjahs3nbaxg1"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idProyecto"
+        }
+      ]
+    },
+    "/tareas/v1/proyectos/{idProyecto}/desactivar": {
+      "post": {
+        "tags": [
+          "Proyecto"
+        ],
+        "summary": "Desactiva un proyecto",
+        "operationId": "postDesactivarPorIdProyecto",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Desactiva un proyecto",
+        "x-stoplight": {
+          "id": "kt6we7kcqb3tg"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idProyecto"
+        }
+      ]
+    },
+    "/tareas/v1/tareas": {
+      "get": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Obtener listado de tareas",
+        "operationId": "getTareas",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/archivadas"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TareaDtoListadoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtener listado de tareas",
+        "x-stoplight": {
+          "id": "73reip7p5k7l8"
+        }
+      },
+      "post": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Inserta una tarea",
+        "operationId": "postTareas",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TareaDtoCreacionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TareaDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "TAR_0013: No se puede realizar la acción ya que la tarea padre excede la cantidad de subtareas permitidas</br>TAR_0014: No fue encontrada la tarea bloqueante con id %s"
+          },
+          "404": {
+            "description": "TAR_0018: Si no se especifica un responsable, el estado de la tarea solo puede ser de tipo INICIAL"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Inserta una tarea",
+        "x-stoplight": {
+          "id": "cgc1n9c8h8g6q"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Elimina de forma masiva tareas según ids",
+        "operationId": "deleteTareas",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ids"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EdicionMasivaDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Elimina de forma masiva tareas según ids",
+        "x-stoplight": {
+          "id": "ane5dbdupqhsd"
+        }
+      }
+    },
+    "/tareas/v1/tareas/archivar": {
+      "post": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Archiva de forma masiva tareas según ids",
+        "operationId": "postArchivarTareas",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EdicionMasivaDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Archiva de forma masiva tareas según ids",
+        "x-stoplight": {
+          "id": "q02mqiw93aoe3"
+        }
+      }
+    },
+    "/tareas/v1/tareas/estado": {
+      "post": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Cambia el estado de un listado de tareas",
+        "operationId": "postEstadoTareas",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CambiarEstadoDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EdicionMasivaDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Cambia el estado de un listado de tareas",
+        "x-stoplight": {
+          "id": "o16jhme4r7fp3"
+        }
+      }
+    },
+    "/tareas/v1/tareas/prioridad": {
+      "post": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Cambia las prioridades de un listado de tareas",
+        "operationId": "postPrioridadTareas",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CambiarPrioridadDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EdicionMasivaDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Cambia las prioridades de un listado de tareas",
+        "x-stoplight": {
+          "id": "6dejiuy228rrx"
+        }
+      }
+    },
+    "/tareas/v1/tareas/responsable": {
+      "post": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Cambia de forma masiva el responsable de tareas según ids",
+        "operationId": "postResponsableTareas",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CambiarUsuarioEntornoDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EdicionMasivaDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Cambia de forma masiva el responsable de tareas según ids",
+        "x-stoplight": {
+          "id": "slyk3h2k1gmjx"
+        }
+      }
+    },
+    "/tareas/v1/tareas/supervisor": {
+      "post": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Cambia de forma masiva el supervisor de tareas según ids",
+        "operationId": "postSupervisorTareas",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CambiarUsuarioEntornoDtoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EdicionMasivaDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Cambia de forma masiva el supervisor de tareas según ids",
+        "x-stoplight": {
+          "id": "kn4qmh6vp9ukb"
+        }
+      }
+    },
+    "/tareas/v1/tareas/{idTarea}": {
+      "get": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Obtiene una tarea",
+        "operationId": "getTareaPorIdTarea",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TareaDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtiene una tarea",
+        "x-stoplight": {
+          "id": "z54vwjhy3db37"
+        }
+      },
+      "put": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Actualizar una tarea",
+        "operationId": "putTareaPorIdTarea",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TareaDtoActualizacionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TareaDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- TAR_0013: No se puede realizar la acción ya que la tarea padre excede la cantidad de subtareas permitidas\n - TAR_0023: No puede estar un estado Finalizado, sin tener fecha Finalización \n - TAR_0024: No puede estar un estado que no es Finalizado, con fecha Finalización "
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Actualizar una tarea",
+        "x-stoplight": {
+          "id": "qcty7ivavb6oy"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Elimina una tarea según su id",
+        "operationId": "deleteTareaPorIdTarea",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TareaDtoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Elimina una tarea según su id",
+        "x-stoplight": {
+          "id": "s7yi2reog5o3q"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idTarea"
+        }
+      ]
+    },
+    "/tareas/v1/tareas/{idTarea}/activar": {
+      "post": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Activa una tarea y sus hijas",
+        "operationId": "postActivarPorIdTarea",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TareaArchivadaDtoRabbit"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "TAR_0004: No se puede activar una tarea que no sea de primer nivel"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Activa una tarea y sus hijas",
+        "x-stoplight": {
+          "id": "e5gapvimdkova"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idTarea"
+        }
+      ]
+    },
+    "/tareas/v1/tareas/{idTarea}/adjuntos": {
+      "post": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Insertar archivo en tarea",
+        "operationId": "postAdjuntosPorIdTarea",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "format": "binary",
+                    "type": "string"
+                  },
+                  "fileName": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "fileName": {
+                  "contentType": "text/plain"
+                },
+                "file": {
+                  "contentType": "application/octet-stream"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Insertar archivo en tarea",
+        "x-stoplight": {
+          "id": "rsgxsnzs01bz1"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idTarea"
+        }
+      ]
+    },
+    "/tareas/v1/tareas/{idTarea}/adjuntos/informacion": {
+      "get": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Obtiene los archivos de una tarea",
+        "operationId": "getInformacionAdjuntosPorIdTarea",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TareaDtoArchivoInfoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtiene los archivos de una tarea",
+        "x-stoplight": {
+          "id": "qdhkvk56ickf0"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idTarea"
+        }
+      ]
+    },
+    "/tareas/v1/tareas/{idTarea}/adjuntos/{uuid}": {
+      "delete": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Elimina un archivo de una tarea",
+        "operationId": "deleteAdjuntoPorIdTareaPorUuid",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ArchivoDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Elimina un archivo de una tarea",
+        "x-stoplight": {
+          "id": "al9wk0p5ivjg2"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idTarea"
+        },
+        {
+          "$ref": "#/components/parameters/uuid"
+        }
+      ]
+    },
+    "/tareas/v1/tareas/{idTarea}/ancestros": {
+      "get": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Obtiene los ancestros de la tarea pasada con o sin la tarea incluida",
+        "operationId": "getAncestrosPorIdTarea",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/incluirTareaBase"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TareaDtoAncestroResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtiene los ancestros de la tarea pasada con o sin la tarea incluida",
+        "x-stoplight": {
+          "id": "xw43ayrjoqnuw"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idTarea"
+        }
+      ]
+    },
+    "/tareas/v1/tareas/{idTarea}/archivar": {
+      "post": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Archiva una tarea y sus hijas",
+        "operationId": "postArchivarPorIdTarea",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TareaArchivadaDtoRabbit"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "TAR_0007: No se puede archivar una tarea que no sea de primer nivel</br>TAR_0005: No se puede archivar una tarea que no esté finalizada</br>TAR_0006: No se puede archivar una tarea que tenga una subtarea sin finalizar"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Archiva una tarea y sus hijas",
+        "x-stoplight": {
+          "id": "pp5erp496w25k"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idTarea"
+        }
+      ]
+    },
+    "/tareas/v1/tareas/{idTarea}/cambiar-estado": {
+      "post": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Cambia el estado de supervisión de una tarea",
+        "operationId": "postCambiarEstadoPorIdTarea",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TareaDtoCambiarEstadoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "TAR_0019: No se puede cambiar el estado de la tarea ya que hay observaciones pero no resultado y/o supervisor</br>TAR_0020: No se puede cambiar el estado de la tarea ya que hay resultado pero no supervisor</br>TAR_0018: Si no se especifica un responsable, el estado de la tarea solo puede ser de tipo INICIAL"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Cambia el estado de supervisión de una tarea",
+        "x-stoplight": {
+          "id": "or67g6m1bkwxs"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idTarea"
+        }
+      ]
+    },
+    "/tareas/v1/tareas/{idTarea}/comentarios": {
+      "get": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Obtiene los comentarios de una tarea a partir de su ID",
+        "operationId": "getComentariosPorIdTarea",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ordenAscendente"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ComentarioDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtiene los comentarios de una tarea a partir de su ID",
+        "x-stoplight": {
+          "id": "f2jz45tg9jfk5"
+        }
+      },
+      "post": {
+        "tags": [
+          "Tarea"
+        ],
+        "summary": "Inserta un comentario en una tarea",
+        "operationId": "postComentariosPorIdTarea",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComentarioDtoCreacionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComentarioDtoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Inserta un comentario en una tarea",
+        "x-stoplight": {
+          "id": "5aar7iqo5tog9"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idTarea"
+        }
+      ]
+    },
+    "/tareas/v1/usuarios-entornos": {
+      "get": {
+        "tags": [
+          "Usuario Entorno"
+        ],
+        "summary": "Obtiene un listado de usuarios entornos",
+        "operationId": "getUsuariosEntornos",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioEntornoTareaDtoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "empresa_interno"
+        ],
+        "x-permisos": true,
+        "description": "Obtiene un listado de usuarios entornos",
+        "x-stoplight": {
+          "id": "1pmv9tt0xx0j1"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ArchivoDtoResponse": {
+        "required": [
+          "idTipoEntidad",
+          "idEntidad",
+          "observaciones",
+          "nombre"
+        ],
+        "type": "object",
+        "properties": {
+          "idTipoEntidad": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idEntidad": {
+            "type": "string"
+          },
+          "idTipoEntidadSecundaria": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idEntidadSecundaria": {
+            "type": "string"
+          },
+          "observaciones": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "esCreacion": {
+            "type": "boolean"
+          },
+          "extension": {
+            "type": "string"
+          },
+          "numeroPaginas": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "fechaInsercion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "fechaModificacion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "tamano": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "url": {
+            "type": "string"
+          },
+          "idEmpresa": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "k6r32da5vzwdq"
+        }
+      },
+      "CambiarEstadoDtoRequest": {
+        "required": [
+          "tareas",
+          "idEstado"
+        ],
+        "type": "object",
+        "properties": {
+          "tareas": {
+            "type": "array",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "idEstado": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "4yxs4jr4ffjoy"
+        }
+      },
+      "CambiarPrioridadDtoRequest": {
+        "required": [
+          "tareas",
+          "prioridad"
+        ],
+        "type": "object",
+        "properties": {
+          "tareas": {
+            "type": "array",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "prioridad": {
+            "$ref": "#/components/schemas/PrioridadEnum"
+          }
+        },
+        "x-stoplight": {
+          "id": "0jk8j8jya75yd"
+        }
+      },
+      "CambiarUsuarioEntornoDtoRequest": {
+        "required": [
+          "tareas",
+          "idUsuarioEntorno"
+        ],
+        "type": "object",
+        "properties": {
+          "tareas": {
+            "type": "array",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "idUsuarioEntorno": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "8b8i4lqiihuju"
+        }
+      },
+      "ComentarioDtoActualizacionRequest": {
+        "required": [
+          "texto"
+        ],
+        "type": "object",
+        "properties": {
+          "texto": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "d71gfz09ydawi"
+        }
+      },
+      "ComentarioDtoCreacionRequest": {
+        "required": [
+          "texto"
+        ],
+        "type": "object",
+        "properties": {
+          "texto": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "jyt28nuth4uhr"
+        }
+      },
+      "ComentarioDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idComentario": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "texto": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "fechaUltimaEdicion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "usuarioEntorno": {
+            "$ref": "#/components/schemas/UsuarioEntornoTareaDtoResponse"
+          },
+          "borrado": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "3j3o6omxb3okz"
+        }
+      },
+      "EdicionMasivaDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idTarea": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "mensaje": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "8iasobtotvbcp"
+        }
+      },
+      "EstadoDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idEstado": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "orden": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "tipo": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "w6k6zo9jf3ynu"
+        }
+      },
+      "OrigenDtoRequest": {
+        "required": [
+          "nombre"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "maxLength": 128,
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "9xvw9ie4360ge"
+        }
+      },
+      "OrigenDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idOrigen": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "idModulo": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "origenInterno": {
+            "type": "boolean"
+          },
+          "activo": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "ujfjkwkkbxhl5"
+        }
+      },
+      "PrioridadEnum": {
+        "enum": [
+          "ALTA",
+          "MEDIA",
+          "BAJA"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "ibhjsuyiexvrc"
+        }
+      },
+      "ProyectoDtoRequest": {
+        "required": [
+          "nombre"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "maxLength": 128,
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "vsdacu8yfgjcu"
+        }
+      },
+      "ProyectoDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idProyecto": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "activo": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "xvqfvop539dtj"
+        }
+      },
+      "ResultadoSupervisionEnum": {
+        "enum": [
+          "OK",
+          "PENDIENTE",
+          "NO_VALIDA"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "imnwt6ryv5nyq"
+        }
+      },
+      "TareaArchivadaDtoRabbit": {
+        "type": "object",
+        "properties": {
+          "idTarea": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "archivada": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "mo8yn32kp3u5v"
+        }
+      },
+      "TareaBloqueanteDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idTarea": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "4l5z9fcsdj2qz"
+        }
+      },
+      "TareaDtoActualizacionRequest": {
+        "required": [
+          "nombre",
+          "color",
+          "idProyecto",
+          "idOrigen",
+          "idEstado",
+          "fechaInicioEstimada",
+          "fechaFinEstimada",
+          "prioridad"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "maxLength": 256,
+            "type": "string"
+          },
+          "color": {
+            "maxLength": 45,
+            "type": "string"
+          },
+          "idProyecto": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idOrigen": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idEstado": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "descripcion": {
+            "type": "string"
+          },
+          "fechaInicioEstimada": {
+            "type": "string"
+          },
+          "fechaFinEstimada": {
+            "type": "string"
+          },
+          "prioridad": {
+            "$ref": "#/components/schemas/PrioridadEnum"
+          },
+          "idUsuarioEntornoResponsable": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idUsuarioEntornoSupervisor": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "presupuesto": {
+            "format": "float",
+            "type": "number"
+          },
+          "observacionesPresupuesto": {
+            "type": "string"
+          },
+          "tareasBloqueantes": {
+            "type": "array",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "idTareaPadre": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "b67xscu78kvv7"
+        }
+      },
+      "TareaDtoAncestroResponse": {
+        "type": "object",
+        "properties": {
+          "idTarea": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "subtarea": {
+            "$ref": "#/components/schemas/TareaDtoAncestroResponse"
+          }
+        },
+        "x-stoplight": {
+          "id": "z8yfsfpjkgnbc"
+        }
+      },
+      "TareaDtoArchivoInfoResponse": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "extension": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "tamano": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "fdcolfohz50ck"
+        }
+      },
+      "TareaDtoCambiarEstadoRequest": {
+        "required": [
+          "idEstado"
+        ],
+        "type": "object",
+        "properties": {
+          "idUsuarioEntornoSupervisor": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "resultado": {
+            "$ref": "#/components/schemas/ResultadoSupervisionEnum"
+          },
+          "observaciones": {
+            "type": "string"
+          },
+          "idEstado": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idUsuarioEntornoResponsable": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "fechaFinalizacion": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "9bjb9i28zukje"
+        }
+      },
+      "TareaDtoCreacionRequest": {
+        "required": [
+          "nombre",
+          "color",
+          "idProyecto",
+          "idOrigen",
+          "idEstado",
+          "fechaInicioEstimada",
+          "fechaFinEstimada",
+          "prioridad"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "maxLength": 256,
+            "type": "string"
+          },
+          "color": {
+            "maxLength": 45,
+            "type": "string"
+          },
+          "idProyecto": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idOrigen": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idEstado": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "descripcion": {
+            "type": "string"
+          },
+          "fechaInicioEstimada": {
+            "type": "string"
+          },
+          "fechaFinEstimada": {
+            "type": "string"
+          },
+          "prioridad": {
+            "$ref": "#/components/schemas/PrioridadEnum"
+          },
+          "idUsuarioEntornoResponsable": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idUsuarioEntornoSupervisor": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "presupuesto": {
+            "format": "float",
+            "type": "number"
+          },
+          "observacionesPresupuesto": {
+            "type": "string"
+          },
+          "tareasBloqueantes": {
+            "type": "array",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "idTareaPadre": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idMedidaPreventiva": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "n1371h3wxkc7l"
+        }
+      },
+      "TareaDtoListadoDashboard": {
+        "type": "object",
+        "properties": {
+          "idTarea": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "proyecto": {
+            "$ref": "#/components/schemas/ProyectoDtoResponse"
+          },
+          "origen": {
+            "$ref": "#/components/schemas/OrigenDtoResponse"
+          },
+          "responsable": {
+            "$ref": "#/components/schemas/UsuarioEntornoTareaDtoResponse"
+          },
+          "supervisor": {
+            "$ref": "#/components/schemas/UsuarioEntornoTareaDtoResponse"
+          },
+          "fechaFinEstimada": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "resultadoSupervision": {
+            "$ref": "#/components/schemas/ResultadoSupervisionEnum"
+          }
+        },
+        "x-stoplight": {
+          "id": "3ihsc3xs5rqw7"
+        }
+      },
+      "TareaDtoListadoKanban": {
+        "type": "object",
+        "properties": {
+          "idTarea": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "proyecto": {
+            "$ref": "#/components/schemas/ProyectoDtoResponse"
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoDtoResponse"
+          },
+          "responsable": {
+            "$ref": "#/components/schemas/UsuarioEntornoTareaDtoResponse"
+          },
+          "supervisor": {
+            "$ref": "#/components/schemas/UsuarioEntornoTareaDtoResponse"
+          },
+          "fechaFinEstimada": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "resultadoSupervision": {
+            "$ref": "#/components/schemas/ResultadoSupervisionEnum"
+          },
+          "prioridad": {
+            "$ref": "#/components/schemas/PrioridadEnum"
+          }
+        },
+        "x-stoplight": {
+          "id": "n2anr0puk5vxd"
+        }
+      },
+      "TareaDtoListadoResponse": {
+        "type": "object",
+        "properties": {
+          "idTarea": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idTareaPadre": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "proyecto": {
+            "$ref": "#/components/schemas/ProyectoDtoResponse"
+          },
+          "origen": {
+            "$ref": "#/components/schemas/OrigenDtoResponse"
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoDtoResponse"
+          },
+          "responsable": {
+            "$ref": "#/components/schemas/UsuarioEntornoTareaDtoResponse"
+          },
+          "supervisor": {
+            "$ref": "#/components/schemas/UsuarioEntornoTareaDtoResponse"
+          },
+          "prioridad": {
+            "$ref": "#/components/schemas/PrioridadEnum"
+          },
+          "fechaFinEstimada": {
+            "type": "string"
+          },
+          "tareas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TareaDtoListadoResponse"
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "fmh4ji6qfk43i"
+        }
+      },
+      "TareaDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idTarea": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idTareaPadre": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "descripcion": {
+            "type": "string"
+          },
+          "prioridad": {
+            "$ref": "#/components/schemas/PrioridadEnum"
+          },
+          "archivada": {
+            "type": "boolean"
+          },
+          "presupuesto": {
+            "format": "float",
+            "type": "number"
+          },
+          "observacionesPresupuesto": {
+            "type": "string"
+          },
+          "resultadoSupervision": {
+            "$ref": "#/components/schemas/ResultadoSupervisionEnum"
+          },
+          "observacionesSupervision": {
+            "type": "string"
+          },
+          "proyecto": {
+            "$ref": "#/components/schemas/ProyectoDtoResponse"
+          },
+          "origen": {
+            "$ref": "#/components/schemas/OrigenDtoResponse"
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoDtoResponse"
+          },
+          "fechaInicioEstimada": {
+            "type": "string"
+          },
+          "fechaFinEstimada": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "responsable": {
+            "$ref": "#/components/schemas/UsuarioEntornoTareaDtoResponse"
+          },
+          "supervisor": {
+            "$ref": "#/components/schemas/UsuarioEntornoTareaDtoResponse"
+          },
+          "creador": {
+            "$ref": "#/components/schemas/UsuarioEntornoTareaDtoResponse"
+          },
+          "tareasBloqueantes": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TareaBloqueanteDtoResponse"
+            }
+          },
+          "tieneSubtareas": {
+            "type": "boolean"
+          },
+          "fechaFinalizacion": {
+            "$ref": "#/components/schemas/ZonedDateTime"
+          },
+          "idMedidaPreventiva": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "dixov56rqhc4n"
+        }
+      },
+      "UsuarioEntornoTareaDtoDashboard": {
+        "type": "object",
+        "properties": {
+          "idUsuarioEntorno": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombreUsuario": {
+            "type": "string"
+          },
+          "nombreEmpresa": {
+            "type": "string"
+          },
+          "nombreRol": {
+            "type": "string"
+          },
+          "numeroTareas": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "c0yw744lunr2p"
+        }
+      },
+      "UsuarioEntornoTareaDtoResponse": {
+        "type": "object",
+        "properties": {
+          "idUsuarioEntorno": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombreUsuario": {
+            "type": "string"
+          },
+          "nombreEmpresa": {
+            "type": "string"
+          },
+          "nombreRol": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "9gis11fs1eo1l"
+        }
+      },
+      "ZonedDateTime": {
+        "format": "date-time",
+        "type": "string",
+        "example": "2022-03-10T12:15:50-04:00",
+        "x-stoplight": {
+          "id": "5efjec45a1zkx"
+        }
+      }
+    },
+    "securitySchemes": {
+      "jwt": {
+        "type": "http",
+        "description": "Authentication",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "parameters": {
+      "idComentario": {
+        "name": "idComentario",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": "TODO: add description"
+      },
+      "X-Timezone": {
+        "name": "X-Timezone",
+        "in": "header",
+        "description": "Zona horaria desde la que se hace la petición",
+        "required": true,
+        "schema": {
+          "default": "Europe/Madrid",
+          "type": "string"
+        }
+      },
+      "nombre": {
+        "name": "nombre",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        },
+        "description": "TODO: add description"
+      },
+      "idOrigen": {
+        "name": "idOrigen",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": "TODO: add description"
+      },
+      "idProyecto": {
+        "name": "idProyecto",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": "TODO: add description"
+      },
+      "archivadas": {
+        "name": "archivadas",
+        "in": "query",
+        "schema": {
+          "type": "boolean"
+        },
+        "description": "TODO: add description"
+      },
+      "ids": {
+        "name": "ids",
+        "in": "query",
+        "schema": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "description": "TODO: add description"
+      },
+      "idTarea": {
+        "name": "idTarea",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": "TODO: add description"
+      },
+      "uuid": {
+        "name": "uuid",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "TODO: add description"
+      },
+      "incluirTareaBase": {
+        "name": "incluirTareaBase",
+        "in": "query",
+        "schema": {
+          "type": "boolean"
+        },
+        "description": "TODO: add description"
+      },
+      "ordenAscendente": {
+        "name": "ordenAscendente",
+        "in": "query",
+        "schema": {
+          "type": "boolean"
+        },
+        "description": "TODO: add description"
+      }
+    }
+  }
+}

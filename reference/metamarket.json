@@ -1,0 +1,1358 @@
+{
+  "openapi": "3.0.3",
+  "x-stoplight": {
+    "id": "wfcpjyadlbhg5"
+  },
+  "info": {
+    "title": "metamarket API",
+    "version": "1.0-SNAPSHOT",
+    "description": "API del microservicio de metamarket",
+    "license": {
+      "name": "Proprietary - Internal Use Only",
+      "url": "https://v4.metacontratas.com/"
+    },
+    "contact": {
+      "email": "soporte.tecnico@metadata.es",
+      "name": "Metadata S.L.",
+      "url": "https://v4.metacontratas.com/"
+    }
+  },
+  "tags": [
+    {
+      "name": "Empresas",
+      "description": "Servicio de empresas"
+    },
+    {
+      "name": "TiposActividades",
+      "description": "Servicio de tipo de actividades"
+    },
+    {
+      "name": "Usuario",
+      "description": "Servicio de usuarios"
+    }
+  ],
+  "paths": {
+    "/metamarket/v1/empresas": {
+      "get": {
+        "tags": [
+          "Empresas"
+        ],
+        "summary": "Listado de empresas",
+        "operationId": "getEmpresas",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/busqueda"
+          },
+          {
+            "$ref": "#/components/parameters/contenerTodasActividades"
+          },
+          {
+            "$ref": "#/components/parameters/empresa"
+          },
+          {
+            "$ref": "#/components/parameters/idTipoActividad"
+          },
+          {
+            "$ref": "#/components/parameters/mostrarEmpresaInicio"
+          },
+          {
+            "$ref": "#/components/parameters/mostrarSoloFavoritos"
+          },
+          {
+            "$ref": "#/components/parameters/niveles"
+          },
+          {
+            "$ref": "#/components/parameters/placeId"
+          },
+          {
+            "$ref": "#/components/parameters/tipoActividadCustom"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListadoEmpresaDTOResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Listado de empresas",
+        "x-stoplight": {
+          "id": "596zj2b792wrw"
+        }
+      }
+    },
+    "/metamarket/v1/empresas/{idEmpresa}": {
+      "get": {
+        "tags": [
+          "Empresas"
+        ],
+        "summary": "Detalle de empresa",
+        "operationId": "getEmpresaPorIdEmpresa",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaDTOResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Detalle de empresa",
+        "x-stoplight": {
+          "id": "2mmryo14gl0ph"
+        }
+      },
+      "put": {
+        "tags": [
+          "Empresas"
+        ],
+        "summary": "Editar detalle de empresa",
+        "operationId": "putEmpresaPorIdEmpresa",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmpresaDTORequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaDTOResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Editar detalle de empresa",
+        "x-stoplight": {
+          "id": "vcjoz7m5uy6ab"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idEmpresa"
+        }
+      ]
+    },
+    "/metamarket/v1/empresas/{idEmpresa}/alta": {
+      "post": {
+        "tags": [
+          "Empresas"
+        ],
+        "summary": "Alta de empresa",
+        "operationId": "postAltaPorIdEmpresa",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmpresaAltaDTORequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaDTOResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Alta de empresa",
+        "x-stoplight": {
+          "id": "fk904fqre3vxo"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idEmpresa"
+        }
+      ]
+    },
+    "/metamarket/v1/empresas/{idEmpresa}/anunciar": {
+      "put": {
+        "tags": [
+          "Empresas"
+        ],
+        "summary": "Cambia el flag para mostrar una empresa en la búsqueda",
+        "operationId": "putAnunciarPorIdEmpresa",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaDTOResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Cambia el flag para mostrar una empresa en la búsqueda",
+        "x-stoplight": {
+          "id": "fg305uj2uxbh2"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idEmpresa"
+        }
+      ]
+    },
+    "/metamarket/v1/empresas/{idEmpresa}/ocultar": {
+      "put": {
+        "tags": [
+          "Empresas"
+        ],
+        "summary": "Cambia el flag para ocultar una empresa en la búsqueda",
+        "operationId": "putOcultarPorIdEmpresa",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaDTOResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Cambia el flag para ocultar una empresa en la búsqueda",
+        "x-stoplight": {
+          "id": "sef9crjq8kosv"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idEmpresa"
+        }
+      ]
+    },
+    "/metamarket/v1/tipos-actividades": {
+      "get": {
+        "tags": [
+          "TiposActividades"
+        ],
+        "summary": "Listado de tipos de actividad",
+        "operationId": "getTiposActividades",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoActividadDTOResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Listado de tipos de actividad",
+        "x-stoplight": {
+          "id": "nq7vwk72k4rdw"
+        }
+      }
+    },
+    "/metamarket/v1/usuarios/{idUsuario}/configuraciones": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Obtiene todas la configuraciones",
+        "operationId": "getConfiguracionesPorIdUsuario",
+        "parameters": [
+          {
+            "name": "idEmpresa",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "description": "TODO: add description"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConfiguracionDTOResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "- MMK_0001: El tipo de valor introducido no coincide con el tipo de la configuración seleccionada"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Obtiene todas la configuraciones",
+        "x-stoplight": {
+          "id": "znkh4m79m751z"
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Crea un usuarioConfiguración si no existe. Si existe, lo edita",
+        "operationId": "postConfiguracionesPorIdUsuario",
+        "parameters": [
+          {
+            "name": "idEmpresa",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "description": "TODO: add description"
+          },
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioConfiguracionDTORequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfiguracionDTOResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Crea un usuarioConfiguración si no existe. Si existe, lo edita",
+        "x-stoplight": {
+          "id": "17izqwl5wjghc"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    },
+    "/metamarket/v1/usuarios/{idUsuario}/empresas/{idEmpresa}/favoritos/{idEmpresaFavorito}": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Agrega una empresa a favorito",
+        "operationId": "postFavoritoPorIdUsuarioPorIdEmpresaPorIdEmpresaFavorito",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfiguracionDTOResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Agrega una empresa a favorito",
+        "x-stoplight": {
+          "id": "inww4r3rcbvwi"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Elimina una empresa de favorito",
+        "operationId": "deleteFavoritoPorIdUsuarioPorIdEmpresaPorIdEmpresaFavorito",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/X-Timezone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfiguracionDTOResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "x-roles": [
+          "superadministrador",
+          "no_administrador"
+        ],
+        "x-permisos": true,
+        "description": "Elimina una empresa de favorito",
+        "x-stoplight": {
+          "id": "c7h1zfcnzebua"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/idEmpresa"
+        },
+        {
+          "$ref": "#/components/parameters/idEmpresaFavorito"
+        },
+        {
+          "$ref": "#/components/parameters/idUsuario"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActividadDTORequest": {
+        "required": [
+          "idTipoActividad"
+        ],
+        "type": "object",
+        "properties": {
+          "idActividad": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idTipoActividad": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "tipoActividadCustom": {
+            "maxLength": 128,
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "tkrlb5czug15h"
+        }
+      },
+      "ActividadDTOResponse": {
+        "required": [
+          "idActividad"
+        ],
+        "type": "object",
+        "properties": {
+          "idActividad": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idTipoActividad": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "tipoActividadCustom": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "gzwsbxlrfsjt8"
+        }
+      },
+      "AmbitoActuacionDTORequest": {
+        "required": [
+          "direccion",
+          "extraData",
+          "idPais",
+          "niveles",
+          "placeId"
+        ],
+        "type": "object",
+        "properties": {
+          "direccion": {
+            "type": "string"
+          },
+          "extraData": {
+            "type": "object",
+            "additionalProperties": {}
+          },
+          "idAmbitoActuacion": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "idPais": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "niveles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NivelDtoRequest"
+            }
+          },
+          "nombreArea": {
+            "type": "string"
+          },
+          "placeId": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "z4fwetegp75ma"
+        }
+      },
+      "AmbitoActuacionDTOResponse": {
+        "required": [
+          "idAmbitoActuacion",
+          "direccion",
+          "idPais",
+          "nombreArea",
+          "placeId"
+        ],
+        "type": "object",
+        "properties": {
+          "idAmbitoActuacion": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "direccion": {
+            "type": "string"
+          },
+          "idPais": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombreArea": {
+            "type": "string"
+          },
+          "placeId": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "npqwv3ieflqcm"
+        }
+      },
+      "ConfiguracionDTOResponse": {
+        "required": [
+          "idConfiguracion",
+          "clave",
+          "valor"
+        ],
+        "type": "object",
+        "properties": {
+          "idConfiguracion": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "clave": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "9whpkevg0fon1"
+        }
+      },
+      "ContactoDtoRequest": {
+        "required": [
+          "nombre",
+          "observaciones",
+          "idEntidad",
+          "correosElectronicos",
+          "direcciones",
+          "telefonos"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "maxLength": 255,
+            "type": "string"
+          },
+          "observaciones": {
+            "maxLength": 4096,
+            "type": "string"
+          },
+          "predeterminado": {
+            "type": "boolean"
+          },
+          "idEntidad": {
+            "format": "int32",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "type": "integer"
+          },
+          "correosElectronicos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CorreoElectronicoDtoRequest"
+            }
+          },
+          "direcciones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DireccionDtoRequest"
+            }
+          },
+          "telefonos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelefonoDtoRequest"
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "z3frev6uicubf"
+        }
+      },
+      "CorreoElectronicoDtoRequest": {
+        "required": [
+          "email",
+          "nombre"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "maxLength": 255,
+            "type": "string"
+          },
+          "nombre": {
+            "maxLength": 256,
+            "type": "string"
+          },
+          "predeterminado": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "ujt1eoyugcacj"
+        }
+      },
+      "DireccionDtoRequest": {
+        "required": [
+          "idPais",
+          "direccion",
+          "placeId"
+        ],
+        "type": "object",
+        "properties": {
+          "idPais": {
+            "format": "int32",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "type": "integer"
+          },
+          "predeterminada": {
+            "type": "boolean"
+          },
+          "direccion": {
+            "maxLength": 512,
+            "type": "string"
+          },
+          "placeId": {
+            "type": "string"
+          },
+          "extraData": {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        },
+        "x-stoplight": {
+          "id": "ac7lk1wl0xiw2"
+        }
+      },
+      "EmpresaAltaDTORequest": {
+        "required": [
+          "contacto",
+          "ambitoActuacion",
+          "actividad"
+        ],
+        "type": "object",
+        "properties": {
+          "contacto": {
+            "$ref": "#/components/schemas/ContactoDtoRequest"
+          },
+          "ambitoActuacion": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AmbitoActuacionDTORequest"
+            }
+          },
+          "actividad": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActividadDTORequest"
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "hq88tck1t5et4"
+        }
+      },
+      "EmpresaDTORequest": {
+        "required": [
+          "actividad",
+          "ambitoActuacion"
+        ],
+        "type": "object",
+        "properties": {
+          "web": {
+            "maxLength": 128,
+            "type": "string"
+          },
+          "linkedin": {
+            "maxLength": 128,
+            "type": "string"
+          },
+          "descripcion": {
+            "maxLength": 1024,
+            "type": "string"
+          },
+          "actividad": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActividadDTORequest"
+            }
+          },
+          "ambitoActuacion": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AmbitoActuacionDTORequest"
+            }
+          },
+          "anyoInicioActividad": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "dqp8ge1kk8wab"
+        }
+      },
+      "EmpresaDTOResponse": {
+        "required": [
+          "idEmpresa",
+          "cif",
+          "nombre",
+          "numClientesMetacontratas",
+          "numAnyosMetacontratas",
+          "altaCompletada",
+          "mostrarEnBusqueda",
+          "empresaFavorita",
+          "uuid"
+        ],
+        "type": "object",
+        "properties": {
+          "idEmpresa": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "cif": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "web": {
+            "type": "string"
+          },
+          "linkedin": {
+            "type": "string"
+          },
+          "anyoInicioActividad": {
+            "type": "string"
+          },
+          "numClientesMetacontratas": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "numAnyosMetacontratas": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "descripcion": {
+            "type": "string"
+          },
+          "altaCompletada": {
+            "type": "boolean"
+          },
+          "mostrarEnBusqueda": {
+            "type": "boolean"
+          },
+          "empresaFavorita": {
+            "type": "boolean"
+          },
+          "ambitoActuacion": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AmbitoActuacionDTOResponse"
+            }
+          },
+          "actividad": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActividadDTOResponse"
+            }
+          },
+          "uuid": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "vyc7ut6ezwfpi"
+        }
+      },
+      "ListadoEmpresaDTOResponse": {
+        "required": [
+          "idEmpresa",
+          "nombre",
+          "numClientesMetacontratas",
+          "numAnyosMetacontratas",
+          "empresaFavorita"
+        ],
+        "type": "object",
+        "properties": {
+          "idEmpresa": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "numClientesMetacontratas": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "numAnyosMetacontratas": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "empresaFavorita": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "0on9suwecigst"
+        }
+      },
+      "NivelDtoRequest": {
+        "required": [
+          "direccion",
+          "placeId",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "direccion": {
+            "type": "string"
+          },
+          "placeId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "l680mftx1mlie"
+        }
+      },
+      "TelefonoDtoRequest": {
+        "required": [
+          "idPais",
+          "telefono",
+          "nombre"
+        ],
+        "type": "object",
+        "properties": {
+          "idPais": {
+            "format": "int32",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "type": "integer"
+          },
+          "telefono": {
+            "maxLength": 16,
+            "minLength": 6,
+            "type": "string"
+          },
+          "nombre": {
+            "maxLength": 256,
+            "type": "string"
+          },
+          "predeterminado": {
+            "type": "boolean"
+          }
+        },
+        "x-stoplight": {
+          "id": "i2qh1v22kig1b"
+        }
+      },
+      "TipoActividadDTOResponse": {
+        "required": [
+          "idTipoActividad",
+          "tradEs"
+        ],
+        "type": "object",
+        "properties": {
+          "idTipoActividad": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "tradEs": {
+            "type": "string"
+          },
+          "tradEn": {
+            "type": "string"
+          }
+        },
+        "x-stoplight": {
+          "id": "udmt0rat9bfth"
+        }
+      },
+      "TipoBusquedaEnum": {
+        "enum": [
+          "EN_TODO",
+          "DENTRO_DE"
+        ],
+        "type": "string",
+        "x-stoplight": {
+          "id": "qqowm2uige7f7"
+        }
+      },
+      "UsuarioConfiguracionDTORequest": {
+        "required": [
+          "valor",
+          "idConfiguracion"
+        ],
+        "type": "object",
+        "properties": {
+          "valor": {
+            "maxLength": 128,
+            "type": "string"
+          },
+          "idConfiguracion": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "x-stoplight": {
+          "id": "yjjqjjpvsl99p"
+        }
+      }
+    },
+    "securitySchemes": {
+      "jwt": {
+        "type": "http",
+        "description": "Authentication",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "parameters": {
+      "busqueda": {
+        "name": "busqueda",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/TipoBusquedaEnum"
+        },
+        "description": "TODO: add description"
+      },
+      "contenerTodasActividades": {
+        "name": "contenerTodasActividades",
+        "in": "query",
+        "schema": {
+          "default": false,
+          "type": "boolean"
+        },
+        "description": "TODO: add description"
+      },
+      "empresa": {
+        "name": "empresa",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        },
+        "description": "TODO: add description"
+      },
+      "idTipoActividad": {
+        "name": "idTipoActividad",
+        "in": "query",
+        "schema": {
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "description": "TODO: add description"
+      },
+      "mostrarEmpresaInicio": {
+        "name": "mostrarEmpresaInicio",
+        "in": "query",
+        "schema": {
+          "default": false,
+          "type": "boolean"
+        },
+        "description": "TODO: add description"
+      },
+      "mostrarSoloFavoritos": {
+        "name": "mostrarSoloFavoritos",
+        "in": "query",
+        "schema": {
+          "default": false,
+          "type": "boolean"
+        },
+        "description": "TODO: add description"
+      },
+      "niveles": {
+        "name": "niveles",
+        "in": "query",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": "TODO: add description"
+      },
+      "placeId": {
+        "name": "placeId",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        },
+        "description": "TODO: add description"
+      },
+      "tipoActividadCustom": {
+        "name": "tipoActividadCustom",
+        "in": "query",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": "TODO: add description"
+      },
+      "X-Timezone": {
+        "name": "X-Timezone",
+        "in": "header",
+        "description": "Zona horaria desde la que se hace la petición",
+        "required": true,
+        "schema": {
+          "default": "Europe/Madrid",
+          "type": "string"
+        }
+      },
+      "idEmpresa": {
+        "name": "idEmpresa",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": "TODO: add description"
+      },
+      "idUsuario": {
+        "name": "idUsuario",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": "TODO: add description"
+      },
+      "idEmpresaFavorito": {
+        "name": "idEmpresaFavorito",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": "TODO: add description"
+      }
+    }
+  }
+}
